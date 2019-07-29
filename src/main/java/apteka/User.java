@@ -19,50 +19,43 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user", updatable = false, nullable = false)
-    private int id_user;
+    private int idUser;
 
     @Column(name = "login_name")
-    private String login_name;
+    private String loginName;
 
     @Column(name = "password")
     private String password;
 
     @Column(name = "auth_token")
-    private String auth_token;
+    private String authToken;
 
     @Column(name = "created_date")
-    private Date created_date;
+    private Date createdDate;
+
+    @Column(name = "id_usertype")
+    private int idUserType;
 
 
 
-    public User(String login_name, String password) {
-        this.login_name = login_name;
+    public User(String loginName, String password) {
+        this.loginName = loginName;
         this.password = password;
         SecureRandom secureRandom = new SecureRandom();
         Base64.Encoder base64Encoder = Base64.getUrlEncoder();
         byte[] randomBytes = new byte[24];
         secureRandom.nextBytes(randomBytes);
-        this.auth_token = base64Encoder.encodeToString(randomBytes);
-        this.created_date = new Date();
+        this.authToken = base64Encoder.encodeToString(randomBytes);
+        this.createdDate = new Date();
+        this.idUserType = 1;
     }
 
-    public User() {
+    public String getLoginName() {
+        return loginName;
     }
 
-    public int getId_user() {
-        return id_user;
-    }
-
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
-    }
-
-    public String getLogin_name() {
-        return login_name;
-    }
-
-    public void setLogin_name(String login_name) {
-        this.login_name = login_name;
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
     }
 
     public String getPassword() {
@@ -73,19 +66,40 @@ public class User {
         this.password = password;
     }
 
-    public String getAuth_token() {
-        return auth_token;
+    public String getAuthToken() {
+        return authToken;
     }
 
-    public void setAuth_token(String auth_token) {
-        this.auth_token = auth_token;
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 
-    public Date getCreated_date() {
-        return created_date;
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public void setCreated_date(Date created_date) {
-        this.created_date = created_date;
+        this.createdDate = created_date;
     }
+
+    public int getIdUserType() {
+        return idUserType;
+    }
+
+    public void setIdUserType(int idUserType) {
+        this.idUserType = idUserType;
+    }
+
+    public User() {
+    }
+
+
 }
