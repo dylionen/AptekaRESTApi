@@ -33,12 +33,15 @@ public class User {
     @Column(name = "created_date")
     private Date createdDate;
 
-    @Column(name = "id_usertype")
-    private int idUserType;
+
+
+    @ManyToOne
+    @JoinColumn(name="id_usertype")
+    private UserType idUserType;
 
 
 
-    public User(String loginName, String password) {
+    public User(String loginName, String password, UserType userType) {
         this.loginName = loginName;
         this.password = password;
         SecureRandom secureRandom = new SecureRandom();
@@ -47,7 +50,7 @@ public class User {
         secureRandom.nextBytes(randomBytes);
         this.authToken = base64Encoder.encodeToString(randomBytes);
         this.createdDate = new Date();
-        this.idUserType = 1;
+        this.idUserType = userType;
     }
 
     public String getLoginName() {
@@ -90,11 +93,11 @@ public class User {
         this.createdDate = created_date;
     }
 
-    public int getIdUserType() {
+    public UserType getIdUserType() {
         return idUserType;
     }
 
-    public void setIdUserType(int idUserType) {
+    public void setIdUserType(UserType idUserType) {
         this.idUserType = idUserType;
     }
 

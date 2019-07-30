@@ -22,13 +22,9 @@ import java.util.List;
 public class LoginController {
     SessionFactory sessionUserFactory  =  new Configuration()
             .configure("hibernate.cfg.xml")
-            .addAnnotatedClass(User.class)
+            .addAnnotatedClass(User.class).addAnnotatedClass(UserType.class)
             .buildSessionFactory();
 
-    SessionFactory sessionUserTypesFactory  =  new Configuration()
-            .configure("hibernate.cfg.xml")
-            .addAnnotatedClass(UserType.class)
-            .buildSessionFactory();
 
 
 
@@ -56,8 +52,11 @@ public class LoginController {
     @PostMapping("/users")
     public ResponseEntity createUser(@RequestBody User user) throws JsonProcessingException {
         Session session = sessionUserFactory.getCurrentSession();
-        User newUser = new User(user.getLoginName(),user.getPassword());
         Transaction tx = session.beginTransaction();
+
+        List<UserType> userType = session.createQuery("from UserType where name = 'Pracownik'").getResultList();
+        User newUser = new User(user.getLoginName(),user.getPassword(),userType.get(0));
+
         try {
             session.save(newUser);
             session.getTransaction().commit();
@@ -72,7 +71,7 @@ public class LoginController {
 
     @GetMapping("/usertypes")
     public String getUserTypes() throws JsonProcessingException{
-        Session session = sessionUserTypesFactory.getCurrentSession();
+        Session session = sessionUserFactory.getCurrentSession();
         List<UserType> userTypesList = null;
         Transaction tx = session.beginTransaction();
         try {
