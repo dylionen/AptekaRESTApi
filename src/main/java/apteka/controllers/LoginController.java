@@ -1,5 +1,8 @@
-package apteka;
+package apteka.controllers;
 
+import apteka.tables.Address;
+import apteka.tables.User;
+import apteka.tables.UserType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.Session;
@@ -16,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class DatabaseClient {
+public class LoginController {
     SessionFactory sessionUserFactory  =  new Configuration()
             .configure("hibernate.cfg.xml")
             .addAnnotatedClass(User.class)

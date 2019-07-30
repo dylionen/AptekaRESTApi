@@ -1,4 +1,4 @@
-package apteka;
+package apteka.tables;
 
 import lombok.*;
 
