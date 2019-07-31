@@ -33,8 +33,6 @@ public class User {
     @Column(name = "created_date")
     private Date createdDate;
 
-
-
     @ManyToOne
     @JoinColumn(name="id_usertype")
     private UserType idUserType;

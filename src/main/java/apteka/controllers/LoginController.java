@@ -24,10 +24,6 @@ public class LoginController {
             .configure("hibernate.cfg.xml")
             .addAnnotatedClass(User.class).addAnnotatedClass(UserType.class)
             .buildSessionFactory();
-
-
-
-
     ObjectMapper objectMapper = new ObjectMapper();
 
 

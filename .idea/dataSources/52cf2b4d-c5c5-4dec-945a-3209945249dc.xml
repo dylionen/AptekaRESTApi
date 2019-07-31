@@ -8,11 +8,19 @@
       <ObjectId>16435</ObjectId>
       <StateNumber>620</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>644</IntrospectionStateNumber>
+      <IntrospectionStateNumber>717</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
       <Relations>sequence|table|16436|16438|1
 sequence|table|16458|16460|1
+sequence|table|16495|16497|1
+sequence|table|16572|16574|1
+sequence|table|16598|16600|1
+sequence|table|16619|16621|1
+sequence|table|16630|16632|1
+sequence|table|16648|16650|1
+sequence|table|16659|16661|1
+sequence|table|16670|16672|1
 </Relations>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -104,7 +112,7 @@ sequence|table|16458|16460|1
       <Comment>standard public schema</Comment>
       <StateNumber>360</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>645</IntrospectionStateNumber>
+      <IntrospectionStateNumber>718</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -164,7 +172,55 @@ sequence|table|16458|16460|1
       <SchemaName>pg_catalog</SchemaName>
       <SchemaId>11</SchemaId>
     </extension>
-    <sequence id="26" parent="18" name="user_id_user_seq">
+    <sequence id="26" parent="18" name="Address_id_address_seq">
+      <ObjectId>16495</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>655</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="27" parent="18" name="VAT_table_id_vat_seq">
+      <ObjectId>16659</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>712</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="28" parent="18" name="articles_id_article_seq">
+      <ObjectId>16648</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>711</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="29" parent="18" name="contact_id_contact_seq">
+      <ObjectId>16572</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>705</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="30" parent="18" name="localizations_id_localization_seq">
+      <ObjectId>16598</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>708</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="31" parent="18" name="types_warehouse_movements_id_warehouse_movement_seq">
+      <ObjectId>16619</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>709</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="32" parent="18" name="user_id_user_seq">
       <ObjectId>16436</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>621</StateNumber>
@@ -172,7 +228,7 @@ sequence|table|16458|16460|1
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="27" parent="18" name="user_type_id_type_seq">
+    <sequence id="33" parent="18" name="user_type_id_type_seq">
       <ObjectId>16458</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>632</StateNumber>
@@ -180,17 +236,450 @@ sequence|table|16458|16460|1
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <table id="28" parent="18" name="user_types">
+    <sequence id="34" parent="18" name="warehouse_movements_id_warehouse_movement_seq">
+      <ObjectId>16630</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>710</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="35" parent="18" name="wh_list_id_whlist_seq">
+      <ObjectId>16670</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>713</StateNumber>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <table id="36" parent="18" name="VAT_table">
+      <ObjectId>16661</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>713</StateNumber>
+    </table>
+    <table id="37" parent="18" name="address">
+      <ObjectId>16497</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>657</StateNumber>
+    </table>
+    <table id="38" parent="18" name="address_userlist">
+      <ObjectId>16557</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>699</StateNumber>
+    </table>
+    <table id="39" parent="18" name="articles">
+      <ObjectId>16650</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>715</StateNumber>
+    </table>
+    <table id="40" parent="18" name="contact">
+      <ObjectId>16574</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>706</StateNumber>
+    </table>
+    <table id="41" parent="18" name="contact_list">
+      <ObjectId>16583</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>706</StateNumber>
+    </table>
+    <table id="42" parent="18" name="localizations">
+      <ObjectId>16600</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>708</StateNumber>
+    </table>
+    <table id="43" parent="18" name="types_warehouse_movements">
+      <ObjectId>16621</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>710</StateNumber>
+    </table>
+    <table id="44" parent="18" name="user_types">
       <ObjectId>16460</ObjectId>
       <Owner>postgres</Owner>
       <StateNumber>641</StateNumber>
     </table>
-    <table id="29" parent="18" name="users">
+    <table id="45" parent="18" name="users">
       <ObjectId>16438</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>641</StateNumber>
+      <StateNumber>658</StateNumber>
     </table>
-    <column id="30" parent="28" name="id_type">
+    <table id="46" parent="18" name="warehouse_movements">
+      <ObjectId>16632</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>710</StateNumber>
+    </table>
+    <table id="47" parent="18" name="wh_list">
+      <ObjectId>16672</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>713</StateNumber>
+    </table>
+    <column id="48" parent="36" name="id_vat">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>712</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;VAT_table_id_vat_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="49" parent="36" name="name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>712</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="50" parent="36" name="value">
+      <Position>3</Position>
+      <DataType>double precision|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>712</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <index id="51" parent="36" name="VAT_table_pkey">
+      <ObjectId>16668</ObjectId>
+      <StateNumber>712</StateNumber>
+      <ColNames>id_vat</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="52" parent="36" name="VAT_table_pkey">
+      <ObjectId>16669</ObjectId>
+      <StateNumber>712</StateNumber>
+      <ColNames>id_vat</ColNames>
+      <UnderlyingIndexName>VAT_table_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="53" parent="37" name="id_address">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>655</StateNumber>
+      <DefaultExpression>nextval(&apos;&quot;Address_id_address_seq&quot;&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="54" parent="37" name="address_type">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>655</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="55" parent="37" name="street">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>655</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="56" parent="37" name="post_code">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>655</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="57" parent="37" name="Address_pkey">
+      <ObjectId>16504</ObjectId>
+      <StateNumber>655</StateNumber>
+      <ColNames>id_address</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="58" parent="37" name="Address_pkey">
+      <ObjectId>16505</ObjectId>
+      <StateNumber>655</StateNumber>
+      <ColNames>id_address</ColNames>
+      <UnderlyingIndexName>Address_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="59" parent="38" name="id_address">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>699</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="60" parent="38" name="id_user">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>699</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="61" parent="38" name="address_userlist_pkey">
+      <ObjectId>16560</ObjectId>
+      <StateNumber>699</StateNumber>
+      <ColNames>id_address
+id_user</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="62" parent="38" name="address_userlist_pkey">
+      <ObjectId>16561</ObjectId>
+      <StateNumber>699</StateNumber>
+      <ColNames>id_address
+id_user</ColNames>
+      <UnderlyingIndexName>address_userlist_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="63" parent="38" name="Adres">
+      <ObjectId>16562</ObjectId>
+      <StateNumber>699</StateNumber>
+      <ColNames>id_address</ColNames>
+      <RefTableId>16497</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>address</RefTableName>
+      <RefKeyName>Address_pkey</RefKeyName>
+      <RefColNames>id_address</RefColNames>
+    </foreign-key>
+    <foreign-key id="64" parent="38" name="User">
+      <ObjectId>16567</ObjectId>
+      <StateNumber>699</StateNumber>
+      <ColNames>id_user</ColNames>
+      <RefTableId>16438</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>users</RefTableName>
+      <RefKeyName>user_pkey</RefKeyName>
+      <RefColNames>id_user</RefColNames>
+    </foreign-key>
+    <column id="65" parent="39" name="id_article">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>711</StateNumber>
+      <DefaultExpression>nextval(&apos;articles_id_article_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="66" parent="39" name="name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>711</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="67" parent="39" name="price">
+      <Position>3</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>711</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="68" parent="39" name="unit">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>716</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="69" parent="39" name="id_user">
+      <Position>5</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>715</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="70" parent="39" name="description">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>715</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="71" parent="39" name="created_date">
+      <Position>7</Position>
+      <DataType>timestamp with time zone|0s</DataType>
+      <StateNumber>715</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="72" parent="39" name="articles_pkey">
+      <ObjectId>16657</ObjectId>
+      <StateNumber>711</StateNumber>
+      <ColNames>id_article</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="73" parent="39" name="articles_pkey">
+      <ObjectId>16658</ObjectId>
+      <StateNumber>711</StateNumber>
+      <ColNames>id_article</ColNames>
+      <UnderlyingIndexName>articles_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="74" parent="39" name="User">
+      <ObjectId>16693</ObjectId>
+      <StateNumber>715</StateNumber>
+      <ColNames>id_user</ColNames>
+      <RefTableId>16438</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>users</RefTableName>
+      <RefKeyName>user_pkey</RefKeyName>
+      <RefColNames>id_user</RefColNames>
+    </foreign-key>
+    <column id="75" parent="40" name="id_contact">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>705</StateNumber>
+      <DefaultExpression>nextval(&apos;contact_id_contact_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="76" parent="40" name="contact_type">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>705</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="77" parent="40" name="value">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>705</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="78" parent="40" name="contact_pkey">
+      <ObjectId>16581</ObjectId>
+      <StateNumber>705</StateNumber>
+      <ColNames>id_contact</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="79" parent="40" name="contact_pkey">
+      <ObjectId>16582</ObjectId>
+      <StateNumber>705</StateNumber>
+      <ColNames>id_contact</ColNames>
+      <UnderlyingIndexName>contact_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="80" parent="41" name="id_user">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>706</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="81" parent="41" name="id_contact">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>706</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="82" parent="41" name="contact_list_pkey">
+      <ObjectId>16586</ObjectId>
+      <StateNumber>706</StateNumber>
+      <ColNames>id_user
+id_contact</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="83" parent="41" name="contact_list_pkey">
+      <ObjectId>16587</ObjectId>
+      <StateNumber>706</StateNumber>
+      <ColNames>id_user
+id_contact</ColNames>
+      <UnderlyingIndexName>contact_list_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="84" parent="41" name="user">
+      <ObjectId>16588</ObjectId>
+      <StateNumber>706</StateNumber>
+      <ColNames>id_user</ColNames>
+      <RefTableId>16438</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>users</RefTableName>
+      <RefKeyName>user_pkey</RefKeyName>
+      <RefColNames>id_user</RefColNames>
+    </foreign-key>
+    <foreign-key id="85" parent="41" name="contact">
+      <ObjectId>16593</ObjectId>
+      <StateNumber>706</StateNumber>
+      <ColNames>id_contact</ColNames>
+      <RefTableId>16574</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>contact</RefTableName>
+      <RefKeyName>contact_pkey</RefKeyName>
+      <RefColNames>id_contact</RefColNames>
+    </foreign-key>
+    <column id="86" parent="42" name="id_localization">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>708</StateNumber>
+      <DefaultExpression>nextval(&apos;localizations_id_localization_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="87" parent="42" name="id_address">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>708</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="88" parent="42" name="id_contact">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>708</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="89" parent="42" name="name">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>708</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="90" parent="42" name="localizations_pkey">
+      <ObjectId>16607</ObjectId>
+      <StateNumber>708</StateNumber>
+      <ColNames>id_localization</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="91" parent="42" name="localizations_pkey">
+      <ObjectId>16608</ObjectId>
+      <StateNumber>708</StateNumber>
+      <ColNames>id_localization</ColNames>
+      <UnderlyingIndexName>localizations_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="92" parent="42" name="Adres">
+      <ObjectId>16609</ObjectId>
+      <StateNumber>708</StateNumber>
+      <ColNames>id_address</ColNames>
+      <RefTableId>16497</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>address</RefTableName>
+      <RefKeyName>Address_pkey</RefKeyName>
+      <RefColNames>id_address</RefColNames>
+    </foreign-key>
+    <foreign-key id="93" parent="42" name="Kontakt">
+      <ObjectId>16614</ObjectId>
+      <StateNumber>708</StateNumber>
+      <ColNames>id_contact</ColNames>
+      <RefTableId>16574</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>contact</RefTableName>
+      <RefKeyName>contact_pkey</RefKeyName>
+      <RefColNames>id_contact</RefColNames>
+    </foreign-key>
+    <column id="94" parent="43" name="id_warehouse_movement">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>709</StateNumber>
+      <DefaultExpression>nextval(&apos;types_warehouse_movements_id_warehouse_movement_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="95" parent="43" name="value">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>709</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="96" parent="43" name="types_warehouse_movements_pkey">
+      <ObjectId>16628</ObjectId>
+      <StateNumber>709</StateNumber>
+      <ColNames>id_warehouse_movement</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="97" parent="43" name="types_warehouse_movements_pkey">
+      <ObjectId>16629</ObjectId>
+      <StateNumber>709</StateNumber>
+      <ColNames>id_warehouse_movement</ColNames>
+      <UnderlyingIndexName>types_warehouse_movements_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="98" parent="44" name="id_type">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -198,27 +687,27 @@ sequence|table|16458|16460|1
       <DefaultExpression>nextval(&apos;user_type_id_type_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="31" parent="28" name="name">
+    <column id="99" parent="44" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>632</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <index id="32" parent="28" name="user_type_pkey">
+    <index id="100" parent="44" name="user_type_pkey">
       <ObjectId>16467</ObjectId>
       <StateNumber>632</StateNumber>
       <ColNames>id_type</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="33" parent="28" name="user_type_pkey">
+    <key id="101" parent="44" name="user_type_pkey">
       <ObjectId>16468</ObjectId>
       <StateNumber>632</StateNumber>
       <ColNames>id_type</ColNames>
       <UnderlyingIndexName>user_type_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <column id="34" parent="29" name="id_user">
+    <column id="102" parent="45" name="id_user">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -226,65 +715,202 @@ sequence|table|16458|16460|1
       <DefaultExpression>nextval(&apos;user_id_user_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="35" parent="29" name="login_name">
+    <column id="103" parent="45" name="login_name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>623</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="36" parent="29" name="password">
+    <column id="104" parent="45" name="password">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>623</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="37" parent="29" name="auth_token">
+    <column id="105" parent="45" name="auth_token">
       <Position>4</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>621</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="38" parent="29" name="created_date">
+    <column id="106" parent="45" name="created_date">
       <Position>7</Position>
-      <DataType>date|0s</DataType>
+      <DataType>timestamp(4) with time zone|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>629</StateNumber>
-      <TypeId>1082</TypeId>
+      <StateNumber>646</StateNumber>
+      <TypeId>1184</TypeId>
     </column>
-    <column id="39" parent="29" name="id_usertype">
+    <column id="107" parent="45" name="id_usertype">
       <Position>8</Position>
-      <DataType>numeric|0s</DataType>
+      <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>641</StateNumber>
+      <StateNumber>652</StateNumber>
       <DefaultExpression>1</DefaultExpression>
-      <TypeId>1700</TypeId>
+      <TypeId>23</TypeId>
     </column>
-    <index id="40" parent="29" name="user_pkey">
+    <index id="108" parent="45" name="user_pkey">
       <ObjectId>16445</ObjectId>
-      <StateNumber>621</StateNumber>
+      <StateNumber>652</StateNumber>
       <ColNames>id_user</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="41" parent="29" name="user_pkey">
+    <key id="109" parent="45" name="user_pkey">
       <ObjectId>16446</ObjectId>
       <StateNumber>621</StateNumber>
       <ColNames>id_user</ColNames>
       <UnderlyingIndexName>user_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="42" parent="29" name="Typ użytkownika">
-      <ObjectId>16470</ObjectId>
-      <StateNumber>641</StateNumber>
-      <ColNames>id_user</ColNames>
+    <foreign-key id="110" parent="45" name="Typ użytkownika">
+      <ObjectId>16490</ObjectId>
+      <StateNumber>652</StateNumber>
+      <ColNames>id_usertype</ColNames>
       <RefTableId>16460</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>user_types</RefTableName>
       <RefKeyName>user_type_pkey</RefKeyName>
       <RefColNames>id_type</RefColNames>
-      <OnUpdate>set-default</OnUpdate>
+    </foreign-key>
+    <column id="111" parent="46" name="id_warehouse_movement">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>710</StateNumber>
+      <DefaultExpression>nextval(&apos;warehouse_movements_id_warehouse_movement_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="112" parent="46" name="id_user">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>710</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="113" parent="46" name="id_type_warehouse_movement">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>710</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="114" parent="46" name="warehouse_movements_pkey">
+      <ObjectId>16636</ObjectId>
+      <StateNumber>710</StateNumber>
+      <ColNames>id_warehouse_movement</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="115" parent="46" name="warehouse_movements_pkey">
+      <ObjectId>16637</ObjectId>
+      <StateNumber>710</StateNumber>
+      <ColNames>id_warehouse_movement</ColNames>
+      <UnderlyingIndexName>warehouse_movements_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="116" parent="46" name="User">
+      <ObjectId>16638</ObjectId>
+      <StateNumber>710</StateNumber>
+      <ColNames>id_user</ColNames>
+      <RefTableId>16438</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>users</RefTableName>
+      <RefKeyName>user_pkey</RefKeyName>
+      <RefColNames>id_user</RefColNames>
+    </foreign-key>
+    <foreign-key id="117" parent="46" name="Type warehouse movement">
+      <ObjectId>16643</ObjectId>
+      <StateNumber>710</StateNumber>
+      <ColNames>id_type_warehouse_movement</ColNames>
+      <RefTableId>16621</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>types_warehouse_movements</RefTableName>
+      <RefKeyName>types_warehouse_movements_pkey</RefKeyName>
+      <RefColNames>id_warehouse_movement</RefColNames>
+    </foreign-key>
+    <column id="118" parent="47" name="id_whlist">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>713</StateNumber>
+      <DefaultExpression>nextval(&apos;wh_list_id_whlist_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="119" parent="47" name="article_id">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>713</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="120" parent="47" name="id_warehouse_movement">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>713</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="121" parent="47" name="value">
+      <Position>4</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>713</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="122" parent="47" name="id_VAT_table">
+      <Position>5</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>713</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="123" parent="47" name="price">
+      <Position>6</Position>
+      <DataType>double precision|0s</DataType>
+      <StateNumber>713</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <index id="124" parent="47" name="wh_list_pkey">
+      <ObjectId>16676</ObjectId>
+      <StateNumber>713</StateNumber>
+      <ColNames>id_whlist</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="125" parent="47" name="wh_list_pkey">
+      <ObjectId>16677</ObjectId>
+      <StateNumber>713</StateNumber>
+      <ColNames>id_whlist</ColNames>
+      <UnderlyingIndexName>wh_list_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="126" parent="47" name="Article">
+      <ObjectId>16678</ObjectId>
+      <StateNumber>713</StateNumber>
+      <ColNames>article_id</ColNames>
+      <RefTableId>16650</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>articles</RefTableName>
+      <RefKeyName>articles_pkey</RefKeyName>
+      <RefColNames>id_article</RefColNames>
+    </foreign-key>
+    <foreign-key id="127" parent="47" name="Warehouse Document">
+      <ObjectId>16683</ObjectId>
+      <StateNumber>713</StateNumber>
+      <ColNames>id_warehouse_movement</ColNames>
+      <RefTableId>16632</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>warehouse_movements</RefTableName>
+      <RefKeyName>warehouse_movements_pkey</RefKeyName>
+      <RefColNames>id_warehouse_movement</RefColNames>
+    </foreign-key>
+    <foreign-key id="128" parent="47" name="VAT Table">
+      <ObjectId>16688</ObjectId>
+      <StateNumber>713</StateNumber>
+      <ColNames>id_VAT_table</ColNames>
+      <RefTableId>16661</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>VAT_table</RefTableName>
+      <RefKeyName>VAT_table_pkey</RefKeyName>
+      <RefColNames>id_vat</RefColNames>
     </foreign-key>
   </database-model>
 </dataSource>
