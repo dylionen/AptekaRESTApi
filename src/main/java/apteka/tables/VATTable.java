@@ -3,7 +3,7 @@ package apteka.tables;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "VAT_table")
+@Table(name = "vat_table")
 public class VATTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

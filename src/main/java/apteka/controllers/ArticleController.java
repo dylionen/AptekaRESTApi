@@ -61,7 +61,7 @@ public class ArticleController {
         session.save(article);
 
         session.getTransaction().commit();
-        
+
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }

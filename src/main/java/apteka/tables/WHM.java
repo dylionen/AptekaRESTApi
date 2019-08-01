@@ -1,6 +1,7 @@
 package apteka.tables;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "warehouse_movements")
@@ -18,9 +19,13 @@ public class WHM {
     @JoinColumn(name = "id_type_warehouse_movement")
     private TypesWHM idTypeWHM;
 
+    @Column(name = "created_date")
+    private Date createdDate;
+
     public WHM(User idUser, TypesWHM idTypeWHM) {
         this.idUser = idUser;
         this.idTypeWHM = idTypeWHM;
+        this.createdDate = new Date();
     }
 
     public WHM() {
@@ -28,6 +33,10 @@ public class WHM {
 
     public User getIdUser() {
         return idUser;
+    }
+
+    public int getIdWh() {
+        return idWh;
     }
 
     public void setIdUser(User idUser) {

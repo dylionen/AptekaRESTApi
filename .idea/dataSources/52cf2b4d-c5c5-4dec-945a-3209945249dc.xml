@@ -8,7 +8,7 @@
       <ObjectId>16435</ObjectId>
       <StateNumber>620</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>717</IntrospectionStateNumber>
+      <IntrospectionStateNumber>733</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
       <Relations>sequence|table|16436|16438|1
@@ -112,7 +112,7 @@ sequence|table|16670|16672|1
       <Comment>standard public schema</Comment>
       <StateNumber>360</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>718</IntrospectionStateNumber>
+      <IntrospectionStateNumber>734</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -305,7 +305,7 @@ sequence|table|16670|16672|1
     <table id="46" parent="18" name="warehouse_movements">
       <ObjectId>16632</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>710</StateNumber>
+      <StateNumber>732</StateNumber>
     </table>
     <table id="47" parent="18" name="wh_list">
       <ObjectId>16672</ObjectId>
@@ -757,14 +757,26 @@ id_contact</ColNames>
       <ColNames>id_user</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="109" parent="45" name="user_pkey">
+    <index id="109" parent="45" name="Token">
+      <ObjectId>16698</ObjectId>
+      <StateNumber>720</StateNumber>
+      <ColNames>auth_token</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="110" parent="45" name="user_pkey">
       <ObjectId>16446</ObjectId>
       <StateNumber>621</StateNumber>
       <ColNames>id_user</ColNames>
       <UnderlyingIndexName>user_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="110" parent="45" name="Typ użytkownika">
+    <key id="111" parent="45" name="Token">
+      <ObjectId>16699</ObjectId>
+      <StateNumber>720</StateNumber>
+      <ColNames>auth_token</ColNames>
+      <UnderlyingIndexName>Token</UnderlyingIndexName>
+    </key>
+    <foreign-key id="112" parent="45" name="Typ użytkownika">
       <ObjectId>16490</ObjectId>
       <StateNumber>652</StateNumber>
       <ColNames>id_usertype</ColNames>
@@ -774,7 +786,7 @@ id_contact</ColNames>
       <RefKeyName>user_type_pkey</RefKeyName>
       <RefColNames>id_type</RefColNames>
     </foreign-key>
-    <column id="111" parent="46" name="id_warehouse_movement">
+    <column id="113" parent="46" name="id_warehouse_movement">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -782,34 +794,40 @@ id_contact</ColNames>
       <DefaultExpression>nextval(&apos;warehouse_movements_id_warehouse_movement_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="112" parent="46" name="id_user">
+    <column id="114" parent="46" name="id_user">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>710</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="113" parent="46" name="id_type_warehouse_movement">
+    <column id="115" parent="46" name="id_type_warehouse_movement">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>710</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="114" parent="46" name="warehouse_movements_pkey">
+    <column id="116" parent="46" name="created_date">
+      <Position>4</Position>
+      <DataType>time with time zone|0s</DataType>
+      <StateNumber>732</StateNumber>
+      <TypeId>1266</TypeId>
+    </column>
+    <index id="117" parent="46" name="warehouse_movements_pkey">
       <ObjectId>16636</ObjectId>
       <StateNumber>710</StateNumber>
       <ColNames>id_warehouse_movement</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="115" parent="46" name="warehouse_movements_pkey">
+    <key id="118" parent="46" name="warehouse_movements_pkey">
       <ObjectId>16637</ObjectId>
       <StateNumber>710</StateNumber>
       <ColNames>id_warehouse_movement</ColNames>
       <UnderlyingIndexName>warehouse_movements_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="116" parent="46" name="User">
+    <foreign-key id="119" parent="46" name="User">
       <ObjectId>16638</ObjectId>
       <StateNumber>710</StateNumber>
       <ColNames>id_user</ColNames>
@@ -819,7 +837,7 @@ id_contact</ColNames>
       <RefKeyName>user_pkey</RefKeyName>
       <RefColNames>id_user</RefColNames>
     </foreign-key>
-    <foreign-key id="117" parent="46" name="Type warehouse movement">
+    <foreign-key id="120" parent="46" name="Type warehouse movement">
       <ObjectId>16643</ObjectId>
       <StateNumber>710</StateNumber>
       <ColNames>id_type_warehouse_movement</ColNames>
@@ -829,7 +847,7 @@ id_contact</ColNames>
       <RefKeyName>types_warehouse_movements_pkey</RefKeyName>
       <RefColNames>id_warehouse_movement</RefColNames>
     </foreign-key>
-    <column id="118" parent="47" name="id_whlist">
+    <column id="121" parent="47" name="id_whlist">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -837,52 +855,52 @@ id_contact</ColNames>
       <DefaultExpression>nextval(&apos;wh_list_id_whlist_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="119" parent="47" name="article_id">
+    <column id="122" parent="47" name="article_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>713</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="120" parent="47" name="id_warehouse_movement">
+    <column id="123" parent="47" name="id_warehouse_movement">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>713</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="121" parent="47" name="value">
+    <column id="124" parent="47" name="value">
       <Position>4</Position>
       <DataType>double precision|0s</DataType>
       <StateNumber>713</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="122" parent="47" name="id_VAT_table">
+    <column id="125" parent="47" name="id_VAT_table">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>713</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="123" parent="47" name="price">
+    <column id="126" parent="47" name="price">
       <Position>6</Position>
       <DataType>double precision|0s</DataType>
       <StateNumber>713</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <index id="124" parent="47" name="wh_list_pkey">
+    <index id="127" parent="47" name="wh_list_pkey">
       <ObjectId>16676</ObjectId>
       <StateNumber>713</StateNumber>
       <ColNames>id_whlist</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="125" parent="47" name="wh_list_pkey">
+    <key id="128" parent="47" name="wh_list_pkey">
       <ObjectId>16677</ObjectId>
       <StateNumber>713</StateNumber>
       <ColNames>id_whlist</ColNames>
       <UnderlyingIndexName>wh_list_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="126" parent="47" name="Article">
+    <foreign-key id="129" parent="47" name="Article">
       <ObjectId>16678</ObjectId>
       <StateNumber>713</StateNumber>
       <ColNames>article_id</ColNames>
@@ -892,7 +910,7 @@ id_contact</ColNames>
       <RefKeyName>articles_pkey</RefKeyName>
       <RefColNames>id_article</RefColNames>
     </foreign-key>
-    <foreign-key id="127" parent="47" name="Warehouse Document">
+    <foreign-key id="130" parent="47" name="Warehouse Document">
       <ObjectId>16683</ObjectId>
       <StateNumber>713</StateNumber>
       <ColNames>id_warehouse_movement</ColNames>
@@ -902,7 +920,7 @@ id_contact</ColNames>
       <RefKeyName>warehouse_movements_pkey</RefKeyName>
       <RefColNames>id_warehouse_movement</RefColNames>
     </foreign-key>
-    <foreign-key id="128" parent="47" name="VAT Table">
+    <foreign-key id="131" parent="47" name="VAT Table">
       <ObjectId>16688</ObjectId>
       <StateNumber>713</StateNumber>
       <ColNames>id_VAT_table</ColNames>

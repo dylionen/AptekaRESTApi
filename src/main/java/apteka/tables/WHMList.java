@@ -1,6 +1,12 @@
 package apteka.tables;
 
+import com.fasterxml.jackson.annotation.*;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
+
 import javax.persistence.*;
+import javax.swing.text.View;
+
 
 @Entity
 @Table(name = "wh_list")
@@ -11,19 +17,35 @@ public class WHMList {
     private int idWHList;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "article_id")
     private Article idArticle;
 
+    @Column(name = "article_id", insertable = false, updatable = false)
+    @JsonProperty("article_id")
+    private int foreignIdArticle;
+
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "id_warehouse_movement")
     private WHM idWHM;
+
+    @Column(name = "id_warehouse_movement", insertable = false, updatable = false)
+    @JsonProperty("id_warehouse_movement")
+    private int foreignIdWHM;
+
 
     @Column(name = "value")
     private double value;
 
-    @ManyToOne
-    @JoinColumn(name = "id_VAT_table")
+    @ManyToOne()
+    @JsonIgnore
+    @JoinColumn(name = "id_vat_table")
     private VATTable idVATTable;
+
+    @Column(name = "id_vat_table", insertable = false, updatable = false)
+    @JsonProperty("id_vat_table")
+    private int foreignIdVATTable;
 
     @Column(name = "price")
     private double price;
@@ -33,6 +55,42 @@ public class WHMList {
         this.idWHM = idWHM;
         this.value = value;
         this.idVATTable = idVATTable;
+        this.price = price;
+/*
+        this.foreignIdArticle = idArticle.getIdArticle();
+        this.foreignIdWHM = idWHM.getIdWh();
+        this.foreignIdVATTable = idVATTable.getIdVat();*/
+    }
+
+    public int getForeignIdArticle() {
+        return foreignIdArticle;
+    }
+
+    public void setForeignIdArticle(int foreignIdArticle) {
+        this.foreignIdArticle = foreignIdArticle;
+    }
+
+    public int getForeignIdWHM() {
+        return foreignIdWHM;
+    }
+
+    public void setForeignIdWHM(int foreignIdWHM) {
+        this.foreignIdWHM = foreignIdWHM;
+    }
+
+    public int getForeignIdVATTable() {
+        return foreignIdVATTable;
+    }
+
+    public void setForeignIdVATTable(int foreignIdVATTable) {
+        this.foreignIdVATTable = foreignIdVATTable;
+    }
+
+    public WHMList(int foreignIdArticle, int foreignIdWHM, double value, int foreignIdVATTable, double price) {
+        this.foreignIdArticle = foreignIdArticle;
+        this.foreignIdWHM = foreignIdWHM;
+        this.value = value;
+        this.foreignIdVATTable = foreignIdVATTable;
         this.price = price;
     }
 
