@@ -1,5 +1,7 @@
 package apteka.tables;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -21,12 +23,23 @@ public class Article {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "unit")
-    private String unit;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "id_unit")
+    private Unit idUnit;
+
+    @Column(name = "id_unit", insertable = false, updatable = false)
+    @JsonProperty("id_unit")
+    private int foreignUnit;
 
     @ManyToOne
-    @JoinColumn(name="id_user")
+    @JsonIgnore
+    @JoinColumn(name = "id_user")
     private User idUser;
+
+    @Column(name = "id_user", insertable = false, updatable = false)
+    @JsonProperty("idUser")
+    private int foreignUser;
 
     @Column(name = "description")
     private String description;
@@ -34,17 +47,31 @@ public class Article {
     @Column(name = "created_date")
     private Date createdDate;
 
-    public Article(){
+    @Column(name = "photo")
+    private byte[] photo;
+
+
+    public Article() {
 
     }
 
-    public Article(String name, double price, String unit, User idUser, String description, Date createdDate) {
+
+    public Article(String name, double price, Unit idUnit, int foreignUnit, User idUser, String description, Date createdDate) {
         this.name = name;
         this.price = price;
-        this.unit = unit;
+        this.idUnit = idUnit;
+        this.foreignUnit = foreignUnit;
         this.idUser = idUser;
         this.description = description;
         this.createdDate = createdDate;
+    }
+
+    public int getForeignUnit() {
+        return foreignUnit;
+    }
+
+    public void setForeignUnit(int foreignUnit) {
+        this.foreignUnit = foreignUnit;
     }
 
     public int getIdArticle() {
@@ -63,6 +90,14 @@ public class Article {
         this.name = name;
     }
 
+    public int getForeignUser() {
+        return foreignUser;
+    }
+
+    public void setForeignUser(int foreignUser) {
+        this.foreignUser = foreignUser;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -71,12 +106,12 @@ public class Article {
         this.price = price;
     }
 
-    public String getUnit() {
-        return unit;
+    public Unit getIdUnit() {
+        return idUnit;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setIdUnit(Unit idUnit) {
+        this.idUnit = idUnit;
     }
 
     public User getIdUser() {
@@ -102,4 +137,13 @@ public class Article {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
 }

@@ -28,6 +28,7 @@ public class MovementsController {
             .addAnnotatedClass(User.class)
             .addAnnotatedClass(TypesWHM.class)
             .addAnnotatedClass(Article.class)
+            .addAnnotatedClass(Unit.class)
             .buildSessionFactory();
     ObjectMapper objectMapper = new ObjectMapper();
 
