@@ -1,5 +1,6 @@
 package apteka.controllers;
 
+import apteka.functionality.AuthValidator;
 import apteka.tables.Article;
 import apteka.tables.Unit;
 import apteka.tables.User;
@@ -59,7 +60,7 @@ public class ArticleController {
         Transaction tx = session.beginTransaction();
 
         try {
-            articles = session.createQuery("from Article").getResultList();
+            articles = session.createQuery("from Article where archived = false").getResultList();
 
         } catch (Exception e) {
             tx.rollback();
@@ -89,8 +90,7 @@ public class ArticleController {
                 unitList.get(0),
                 newArticle.getForeignUnit(),
                 userList.get(0),
-                newArticle.getDescription(),
-                new Date());
+                newArticle.getDescription());
         session.save(article);
 
         session.getTransaction().commit();
@@ -98,11 +98,38 @@ public class ArticleController {
         return article.getIdArticle() + "";
     }
 
-    @GetMapping("/articles/logo/{id}")
-    public ResponseEntity<byte[]> getImage(@PathVariable int id) {
+    @PutMapping("/articles/{id}")
+    public ResponseEntity updateArticle(@PathVariable int id, @RequestHeader(value = "Authorization") String authId, @RequestBody Article newArticle) {
         Session session = sessionArticleFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        List<Article> unitArticle = session.createQuery("from Article where idArticle = " + id).getResultList();
+        User user = AuthValidator.getAuth(authId);
+        if (user == null) return new ResponseEntity<String>("Auth failed", HttpStatus.NOT_ACCEPTABLE);
+        List<Article> articleList = session.createQuery("from Article where idArticle = " + id).getResultList();
+        Article article = null;
+        try {
+            article = articleList.get(0);
+            article.setDescription(newArticle.getDescription());
+            article.setName(newArticle.getName());
+            article.setPrice(newArticle.getPrice());
+
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        tx.commit();
+        session.close();
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping("/articles/logo/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable int id, @RequestHeader(value = "Authorization") String authId) {
+        Session session = sessionArticleFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        User user = AuthValidator.getAuth(authId);
+        if (user == null) return null;
+
+        List<Article> unitArticle = session.createQuery("from Article where  idArticle = " + id).getResultList();
         tx.commit();
         session.close();
         byte[] image = unitArticle.get(0).getPhoto();
@@ -110,7 +137,7 @@ public class ArticleController {
     }
 
     @PostMapping("/articles/addLogo/{id}")
-    public ResponseEntity updateArticle(@PathVariable int id, @RequestParam("avatar") MultipartFile file) {
+    public ResponseEntity updateArticleLogo(@PathVariable int id, @RequestParam("avatar") MultipartFile file) {
         Session session = sessionArticleFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
         List<Article> articlesList = session.createQuery("from Article where idArticle = " + id).getResultList();
@@ -128,5 +155,27 @@ public class ArticleController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @DeleteMapping("/articles/delete/{id}")
+    public ResponseEntity archiveArticle(@PathVariable int id, @RequestHeader(value = "Authorization") String authId) {
+        Session session = sessionArticleFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        User user = AuthValidator.getAuth(authId);
+
+        if (user == null) return new ResponseEntity<String>("Auth failed", HttpStatus.NOT_ACCEPTABLE);
+        List<Article> articlesList = session.createQuery("from Article where idArticle = " + id).getResultList();
+        Article article = null;
+        try {
+            article = articlesList.get(0);
+            article.setArchived(true);
+
+        } catch (Exception e) {
+            return new ResponseEntity<String>("Article delete failed", HttpStatus.NOT_ACCEPTABLE);
+        } finally {
+            tx.commit();
+            session.close();
+        }
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 
 }

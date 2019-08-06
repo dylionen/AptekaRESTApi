@@ -2,17 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="851bdb9a-022a-45c2-a386-9d97d7f56132" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/apteka/tables/Unit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/52cf2b4d-c5c5-4dec-945a-3209945249dc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/52cf2b4d-c5c5-4dec-945a-3209945249dc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/52cf2b4d-c5c5-4dec-945a-3209945249dc/storage_v2/_src_/database/aptekadb.NHe_TA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/52cf2b4d-c5c5-4dec-945a-3209945249dc/storage_v2/_src_/database/aptekadb.NHe_TA/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/apteka/controllers/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/controllers/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/functionality/AuthValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/functionality/AuthValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/apteka/tables/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/tables/Article.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/apteka/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/apteka/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hibernate.cfg.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -27,8 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/apteka/functionality/AuthValidator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+            <state relative-caret-position="245">
+              <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -39,20 +34,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/apteka/controllers/ArticleController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="120" column="12" lean-forward="true" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="12" />
+            <state relative-caret-position="287">
+              <caret line="61" column="13" lean-forward="true" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="59" selection-start-line="12" selection-start-column="59" selection-end-line="12" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -69,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/apteka/tables/Article.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="61" column="29" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
+            <state relative-caret-position="352">
+              <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1605#1606#0" expanded="true" />
@@ -109,6 +95,10 @@
                 <element signature="e#2998#2999#0" expanded="true" />
                 <element signature="e#3040#3041#0" expanded="true" />
                 <element signature="e#3074#3075#0" expanded="true" />
+                <element signature="e#3205#3206#0" expanded="true" />
+                <element signature="e#3236#3237#0" expanded="true" />
+                <element signature="e#3285#3286#0" expanded="true" />
+                <element signature="e#3325#3326#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -117,8 +107,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/apteka/controllers/LoginController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
+            <state relative-caret-position="930">
               <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="46" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="39" selection-start-line="39" selection-end-line="40" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -143,8 +145,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/apteka/tables/Unit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+            <state relative-caret-position="187">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#340#341#0" expanded="true" />
                 <element signature="e#369#370#0" expanded="true" />
@@ -207,7 +209,6 @@
         <option value="$PROJECT_DIR$/src/main/java/apteka/tables/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/apteka/controllers/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/apteka/tables/TypesWHM.java" />
-        <option value="$PROJECT_DIR$/src/main/java/apteka/functionality/AuthValidator.java" />
         <option value="$PROJECT_DIR$/src/main/java/apteka/tables/WHM.java" />
         <option value="$PROJECT_DIR$/src/main/java/apteka/tables/VATTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/apteka/tables/WHMListTest.java" />
@@ -217,6 +218,7 @@
         <option value="$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" />
         <option value="$PROJECT_DIR$/src/main/java/apteka/tables/Article.java" />
+        <option value="$PROJECT_DIR$/src/main/java/apteka/functionality/AuthValidator.java" />
         <option value="$PROJECT_DIR$/src/main/java/apteka/controllers/ArticleController.java" />
       </list>
     </option>
@@ -242,6 +244,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -313,14 +317,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1564963630774" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1565096849093" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../naukaprogramowania" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -404,12 +406,13 @@
       <workItem from="1564926866526" duration="1468000" />
       <workItem from="1564955606121" duration="5668000" />
       <workItem from="1565000518284" duration="2279000" />
-      <workItem from="1565022089225" duration="2778000" />
+      <workItem from="1565022089225" duration="3262000" />
+      <workItem from="1565092366651" duration="3946000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56452000" />
+    <option name="totallyTimeSpent" value="60882000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -424,7 +427,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30738255" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31208053" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Persistence" order="3" side_tool="true" />
@@ -533,16 +536,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/apteka/tables/WHMListTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/apteka/tables/WHM.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -553,13 +546,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/apteka/functionality/AuthValidator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="204">
+          <caret line="12" column="59" selection-start-line="12" selection-start-column="59" selection-end-line="12" selection-end-column="59" />
         </state>
       </provider>
     </entry>
@@ -567,16 +557,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6698">
           <caret line="432" selection-start-line="432" selection-end-line="432" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/apteka/controllers/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -588,23 +568,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#528#529#0" expanded="true" />
             <element signature="e#582#583#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/apteka/tables/Unit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-          <folding>
-            <element signature="e#340#341#0" expanded="true" />
-            <element signature="e#369#370#0" expanded="true" />
-            <element signature="e#410#411#0" expanded="true" />
-            <element signature="e#446#447#0" expanded="true" />
-            <element signature="e#477#478#0" expanded="true" />
-            <element signature="e#504#505#0" expanded="true" />
-            <element signature="e#544#545#0" expanded="true" />
-            <element signature="e#576#577#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -628,17 +591,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/apteka/controllers/LoginController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="59" selection-start-line="12" selection-start-column="59" selection-end-line="12" selection-end-column="59" />
+        <state relative-caret-position="930">
+          <caret line="57" column="12" selection-start-line="57" selection-start-column="12" selection-end-line="57" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="39" selection-start-line="39" selection-end-line="40" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/apteka/tables/Article.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="61" column="29" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="29" />
+        <state relative-caret-position="352">
+          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1605#1606#0" expanded="true" />
@@ -677,14 +653,45 @@
             <element signature="e#2998#2999#0" expanded="true" />
             <element signature="e#3040#3041#0" expanded="true" />
             <element signature="e#3074#3075#0" expanded="true" />
+            <element signature="e#3205#3206#0" expanded="true" />
+            <element signature="e#3236#3237#0" expanded="true" />
+            <element signature="e#3285#3286#0" expanded="true" />
+            <element signature="e#3325#3326#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/apteka/tables/Unit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#340#341#0" expanded="true" />
+            <element signature="e#369#370#0" expanded="true" />
+            <element signature="e#410#411#0" expanded="true" />
+            <element signature="e#446#447#0" expanded="true" />
+            <element signature="e#477#478#0" expanded="true" />
+            <element signature="e#504#505#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+            <element signature="e#576#577#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/apteka/functionality/AuthValidator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="24" column="52" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/apteka/controllers/ArticleController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="120" column="12" lean-forward="true" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="12" />
+        <state relative-caret-position="287">
+          <caret line="61" column="13" lean-forward="true" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

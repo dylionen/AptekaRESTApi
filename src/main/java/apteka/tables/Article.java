@@ -50,20 +50,22 @@ public class Article {
     @Column(name = "photo")
     private byte[] photo;
 
+    @Column(name = "archived")
+    private boolean archived;
 
     public Article() {
 
     }
 
-
-    public Article(String name, double price, Unit idUnit, int foreignUnit, User idUser, String description, Date createdDate) {
+    public Article(String name, double price, Unit idUnit, int foreignUnit, User idUser, String description) {
         this.name = name;
         this.price = price;
         this.idUnit = idUnit;
         this.foreignUnit = foreignUnit;
         this.idUser = idUser;
         this.description = description;
-        this.createdDate = createdDate;
+        this.createdDate = new Date();
+        this.archived = false;
     }
 
     public int getForeignUnit() {
@@ -145,5 +147,14 @@ public class Article {
     public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
+    }
+
 
 }
