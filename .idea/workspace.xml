@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="851bdb9a-022a-45c2-a386-9d97d7f56132" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52cf2b4d-c5c5-4dec-945a-3209945249dc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/52cf2b4d-c5c5-4dec-945a-3209945249dc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52cf2b4d-c5c5-4dec-945a-3209945249dc/storage_v2/_src_/database/aptekadb.NHe_TA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/52cf2b4d-c5c5-4dec-945a-3209945249dc/storage_v2/_src_/database/aptekadb.NHe_TA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/apteka/controllers/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/controllers/ArticleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/functionality/AuthValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/functionality/AuthValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/tables/Article.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/tables/Article.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -34,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/apteka/controllers/ArticleController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="61" column="13" lean-forward="true" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
+            <state relative-caret-position="276">
+              <caret line="119" column="28" selection-start-line="119" selection-start-column="28" selection-end-line="119" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -322,7 +317,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1565096849093" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1565097032035" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../naukaprogramowania" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -407,12 +402,12 @@
       <workItem from="1564955606121" duration="5668000" />
       <workItem from="1565000518284" duration="2279000" />
       <workItem from="1565022089225" duration="3262000" />
-      <workItem from="1565092366651" duration="3946000" />
+      <workItem from="1565092366651" duration="4129000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60882000" />
+    <option name="totallyTimeSpent" value="61065000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -690,8 +685,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/apteka/controllers/ArticleController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="61" column="13" lean-forward="true" selection-start-line="61" selection-start-column="13" selection-end-line="61" selection-end-column="13" />
+        <state relative-caret-position="276">
+          <caret line="119" column="28" selection-start-line="119" selection-start-column="28" selection-end-line="119" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -111,13 +111,14 @@ public class ArticleController {
             article.setDescription(newArticle.getDescription());
             article.setName(newArticle.getName());
             article.setPrice(newArticle.getPrice());
+            session.update(article);
 
         } catch (Exception e) {
             e.getMessage();
+        } finally {
+            tx.commit();
+            session.close();
         }
-        tx.commit();
-        session.close();
-
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
