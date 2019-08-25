@@ -22,10 +22,14 @@ public class WHM {
     @Column(name = "created_date")
     private Date createdDate;
 
+    @Column(name = "bufor")
+    private boolean bufor;
+
     public WHM(User idUser, TypesWHM idTypeWHM) {
         this.idUser = idUser;
         this.idTypeWHM = idTypeWHM;
         this.createdDate = new Date();
+        this.bufor = true;
     }
 
     public WHM() {
@@ -50,4 +54,25 @@ public class WHM {
     public void setIdTypeWHM(TypesWHM idTypeWHM) {
         this.idTypeWHM = idTypeWHM;
     }
+
+    public void setIdWh(int idWh) {
+        this.idWh = idWh;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public boolean isBufor() {
+        return bufor;
+    }
+
+    public void setBufor(boolean bufor) {
+        this.bufor = bufor;
+    }
+
 }

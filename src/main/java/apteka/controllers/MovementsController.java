@@ -49,6 +49,23 @@ public class MovementsController {
     }
 
 
+    @PostMapping("/createPM")
+    public int createPM(@RequestHeader(value="Authorization") String authId){
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        User user = AuthValidator.getAuth(authId);
+        if(user==null) return -1;
+
+        List<TypesWHM> typesWHMS = session.createQuery("from TypesWHM where id_whmtype = 2").getResultList();
+
+        WHM whm = new WHM(user,typesWHMS.get(0));
+        session.save(whm);
+        session.getTransaction().commit();
+        return whm.getIdWh();
+    }
+
+
     @GetMapping("getWMArticlesList/{WHMid}")
     public String getWMArticlesList(@PathVariable int WHMid, @RequestHeader(value="Authorization") String authId) throws JsonProcessingException {
         Session session = sessionFactory.getCurrentSession();

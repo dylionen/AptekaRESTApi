@@ -14,6 +14,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
+          <factory-entry name="entityManagerFactory" />
           <factory-entry name="mainPU" value="52cf2b4d-c5c5-4dec-945a-3209945249dc" />
         </datasource-mapping>
         <naming-strategy-map />

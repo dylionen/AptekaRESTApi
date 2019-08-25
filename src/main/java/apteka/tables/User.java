@@ -1,5 +1,7 @@
 package apteka.tables;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,18 +27,24 @@ public class User {
     private String loginName;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     @Column(name = "auth_token")
     private String authToken;
 
     @Column(name = "created_date")
+    @JsonIgnore
     private Date createdDate;
 
     @ManyToOne
-    @JoinColumn(name="id_usertype")
+    @JsonIgnore
+    @JoinColumn(name = "id_usertype")
     private UserType idUserType;
 
+    @Column(name = "id_usertype", insertable = false, updatable = false)
+    @JsonProperty("id_usertype")
+    private int foreignIdUserType;
 
 
     public User(String loginName, String password, UserType userType) {
@@ -50,6 +58,7 @@ public class User {
         this.createdDate = new Date();
         this.idUserType = userType;
     }
+
 
     public String getLoginName() {
         return loginName;
@@ -100,6 +109,18 @@ public class User {
     }
 
     public User() {
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public int getForeignIdUserType() {
+        return foreignIdUserType;
+    }
+
+    public void setForeignIdUserType(int foreignIdUserType) {
+        this.foreignIdUserType = foreignIdUserType;
     }
 
 
