@@ -1,5 +1,8 @@
 package apteka.tables;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,8 +15,13 @@ public class WHM {
     private int idWh;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "id_user")
     private User idUser;
+
+    @Column(name = "id_user", insertable = false, updatable = false)
+    @JsonProperty("id_user")
+    private int foreignIdUser;
 
     @ManyToOne
     @JoinColumn(name = "id_type_warehouse_movement")
@@ -25,11 +33,23 @@ public class WHM {
     @Column(name = "bufor")
     private boolean bufor;
 
-    public WHM(User idUser, TypesWHM idTypeWHM) {
+    @Column(name = "price")
+    private Double price;
+
+    @Column(name = "priceb")
+    private Double priceB;
+
+    @Column(name = "foreign_name")
+    private String foreignName;
+
+    public WHM(User idUser, TypesWHM idTypeWHM, Double price, Double priceB, String foreignName) {
         this.idUser = idUser;
         this.idTypeWHM = idTypeWHM;
         this.createdDate = new Date();
         this.bufor = true;
+        this.price = price;
+        this.priceB = priceB;
+        this.foreignName = foreignName;
     }
 
     public WHM() {
@@ -75,4 +95,27 @@ public class WHM {
         this.bufor = bufor;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Double getPriceB() {
+        return priceB;
+    }
+
+    public void setPriceB(Double priceB) {
+        this.priceB = priceB;
+    }
+
+    public String getForeignName() {
+        return foreignName;
+    }
+
+    public void setForeignName(String foreignName) {
+        this.foreignName = foreignName;
+    }
 }

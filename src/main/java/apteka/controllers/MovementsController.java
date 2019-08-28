@@ -42,7 +42,7 @@ public class MovementsController {
 
         List<TypesWHM> typesWHMS = session.createQuery("from TypesWHM where id_whmtype = 1").getResultList();
 
-        WHM whm = new WHM(user,typesWHMS.get(0));
+        WHM whm = new WHM(user,typesWHMS.get(0),0.0,0.0,"T");
         session.save(whm);
         session.getTransaction().commit();
         return whm.getIdWh();
@@ -50,7 +50,8 @@ public class MovementsController {
 
 
     @PostMapping("/createPM")
-    public int createPM(@RequestHeader(value="Authorization") String authId){
+    public int createPM(@RequestHeader(value="Authorization") String authId,@RequestBody WHM jsonWHM){
+        System.out.println(jsonWHM.getForeignName());
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
@@ -59,10 +60,28 @@ public class MovementsController {
 
         List<TypesWHM> typesWHMS = session.createQuery("from TypesWHM where id_whmtype = 2").getResultList();
 
-        WHM whm = new WHM(user,typesWHMS.get(0));
+        WHM whm = new WHM(user,typesWHMS.get(0),jsonWHM.getPrice(),jsonWHM.getPriceB(),jsonWHM.getForeignName());
         session.save(whm);
         session.getTransaction().commit();
         return whm.getIdWh();
+    }
+
+    @GetMapping("/getPM/{PMid}")
+    public String getPM(@PathVariable int PMid, @RequestHeader(value="Authorization") String authId) throws JsonProcessingException {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        List<WHM> WH = null;
+
+        try{
+            WH = session.createQuery("from WHM where idWh =" + PMid).getResultList();
+            tx.commit();
+        }catch (Exception e){
+            tx.rollback();
+            return e.getMessage();
+        } finally {
+            //session.getTransaction().commit();
+        }
+        return objectMapper.writeValueAsString(WH.get(0));
     }
 
 
@@ -112,6 +131,26 @@ public class MovementsController {
         tx.commit();
 
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping("/getVAT")
+    public String createWMArticlesList(@RequestHeader(value="Authorization") String authId) throws JsonProcessingException{
+        Session session = sessionFactory.getCurrentSession();
+        List<VATTable> vatTables = null;
+
+        Transaction tx = session.beginTransaction();
+
+        try {
+            vatTables = session.createQuery("from VATTable").getResultList();
+
+        } catch (Exception e) {
+            tx.rollback();
+        } finally {
+            session.getTransaction().commit();
+            session.close();
+            //session.getTransaction().commit();
+        }
+        return objectMapper.writeValueAsString(vatTables);
     }
 
 }
