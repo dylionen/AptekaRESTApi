@@ -42,11 +42,11 @@ public class WHM {
     @Column(name = "foreign_name")
     private String foreignName;
 
-    public WHM(User idUser, TypesWHM idTypeWHM, Double price, Double priceB, String foreignName) {
+    public WHM(User idUser, TypesWHM idTypeWHM, Double price,Boolean bufor,Double priceB, String foreignName) {
         this.idUser = idUser;
         this.idTypeWHM = idTypeWHM;
         this.createdDate = new Date();
-        this.bufor = true;
+        this.bufor = bufor;
         this.price = price;
         this.priceB = priceB;
         this.foreignName = foreignName;

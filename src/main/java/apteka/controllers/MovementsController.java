@@ -42,7 +42,7 @@ public class MovementsController {
 
         List<TypesWHM> typesWHMS = session.createQuery("from TypesWHM where id_whmtype = 1").getResultList();
 
-        WHM whm = new WHM(user,typesWHMS.get(0),0.0,0.0,"T");
+        WHM whm = new WHM(user,typesWHMS.get(0),0.0,false,0.0,"T");
         session.save(whm);
         session.getTransaction().commit();
         return whm.getIdWh();
@@ -60,14 +60,35 @@ public class MovementsController {
 
         List<TypesWHM> typesWHMS = session.createQuery("from TypesWHM where id_whmtype = 2").getResultList();
 
-        WHM whm = new WHM(user,typesWHMS.get(0),jsonWHM.getPrice(),jsonWHM.getPriceB(),jsonWHM.getForeignName());
+        WHM whm = new WHM(user,typesWHMS.get(0),jsonWHM.getPrice(),false,jsonWHM.getPriceB(),jsonWHM.getForeignName());
         session.save(whm);
         session.getTransaction().commit();
         return whm.getIdWh();
     }
 
+    @GetMapping("/getPM")
+    public String getPM(@RequestHeader(value="Authorization") String authId) throws JsonProcessingException {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        List<WHM> WH = null;
+
+        try{
+            WH = session.createQuery("from WHM where idTypeWHM = 2").getResultList();
+            System.out.println(WH);
+            tx.commit();
+        }catch (Exception e){
+            tx.rollback();
+            return e.getMessage();
+        } finally {
+            //session.getTransaction().commit();
+        }
+        return objectMapper.writeValueAsString(WH);
+    }
+
+
+
     @GetMapping("/getPM/{PMid}")
-    public String getPM(@PathVariable int PMid, @RequestHeader(value="Authorization") String authId) throws JsonProcessingException {
+    public String getPMCurrent(@PathVariable int PMid, @RequestHeader(value="Authorization") String authId) throws JsonProcessingException {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
         List<WHM> WH = null;
@@ -92,7 +113,7 @@ public class MovementsController {
         List<WHMList> whmLists;
 
         try{
-            whmLists = session.createQuery("from WHMList where idWHM =" + WHMid).getResultList();
+            whmLists = session.createQuery("from WHMList where id_warehouse_movement =" + WHMid).getResultList();
             tx.commit();
         }catch (Exception e){
             tx.rollback();
