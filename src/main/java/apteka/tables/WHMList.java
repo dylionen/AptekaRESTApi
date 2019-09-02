@@ -22,7 +22,7 @@ public class WHMList {
     private Article idArticle;
 
     @Column(name = "article_id", insertable = false, updatable = false)
-    @JsonProperty("article_id")
+    @JsonProperty("idArticle")
     private int foreignIdArticle;
 
     @ManyToOne
@@ -44,7 +44,7 @@ public class WHMList {
     private VATTable idVATTable;
 
     @Column(name = "id_vat_table", insertable = false, updatable = false)
-    @JsonProperty("id_vat_table")
+    @JsonProperty("idVATTable")
     private int foreignIdVATTable;
 
     @Column(name = "price")
