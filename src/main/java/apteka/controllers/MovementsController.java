@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,6 +29,11 @@ public class MovementsController {
             .addAnnotatedClass(TypesWHM.class)
             .addAnnotatedClass(Article.class)
             .addAnnotatedClass(Unit.class)
+            .addAnnotatedClass(Localization.class)
+            .addAnnotatedClass(Address.class)
+            .addAnnotatedClass(AddressType.class)
+            .addAnnotatedClass(Contact.class)
+            .addAnnotatedClass(ContactType.class)
             .buildSessionFactory();
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -42,8 +46,9 @@ public class MovementsController {
         if (user == null) return -1;
 
         List<TypesWHM> typesWHMS = session.createQuery("from TypesWHM where id_whmtype = 1").getResultList();
+        List<Localization> listLocalizations = session.createQuery("from Localization").getResultList();
 
-        WHM whm = new WHM(user, typesWHMS.get(0), 0.0, false, 0.0, "T");
+        WHM whm = new WHM(user, typesWHMS.get(0), 0.0, false, 0.0, "T", listLocalizations.get(0));
         session.save(whm);
         session.getTransaction().commit();
         return whm.getIdWh();
@@ -60,8 +65,9 @@ public class MovementsController {
         if (user == null) return -1;
 
         List<TypesWHM> typesWHMS = session.createQuery("from TypesWHM where id_whmtype = 2").getResultList();
+        List<Localization> listLocalizations = session.createQuery("from Localization").getResultList();
 
-        WHM whm = new WHM(user, typesWHMS.get(0), jsonWHM.getPrice(), false, jsonWHM.getPriceB(), jsonWHM.getForeignName());
+        WHM whm = new WHM(user, typesWHMS.get(0), jsonWHM.getPrice(), false, jsonWHM.getPriceB(), jsonWHM.getForeignName(), listLocalizations.get(0));
         session.save(whm);
         session.getTransaction().commit();
         return whm.getIdWh();
@@ -140,7 +146,7 @@ public class MovementsController {
         System.out.println(Arrays.toString(whmList.toArray()));
 
 
-        for(WHMList whTmp : whmList) {
+        for (WHMList whTmp : whmList) {
 
             //Article idArticle, WHM idWHM, double value, VATTable idVATTable, double price
 

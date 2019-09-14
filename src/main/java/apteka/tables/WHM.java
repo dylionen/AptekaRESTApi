@@ -42,9 +42,14 @@ public class WHM {
     @Column(name = "foreign_name")
     private String foreignName;
 
-    public WHM(User idUser, TypesWHM idTypeWHM, Double price,Boolean bufor,Double priceB, String foreignName) {
+    @ManyToOne
+    @JoinColumn(name = "id_localization")
+    private Localization idLocalization;
+
+    public WHM(User idUser, TypesWHM idTypeWHM, Double price, Boolean bufor, Double priceB, String foreignName, Localization idLocalization) {
         this.idUser = idUser;
         this.idTypeWHM = idTypeWHM;
+        this.idLocalization = idLocalization;
         this.createdDate = new Date();
         this.bufor = bufor;
         this.price = price;
@@ -118,4 +123,21 @@ public class WHM {
     public void setForeignName(String foreignName) {
         this.foreignName = foreignName;
     }
+
+    public int getForeignIdUser() {
+        return foreignIdUser;
+    }
+
+    public void setForeignIdUser(int foreignIdUser) {
+        this.foreignIdUser = foreignIdUser;
+    }
+
+    public Localization getIdLocalization() {
+        return idLocalization;
+    }
+
+    public void setIdLocalization(Localization idLocalization) {
+        this.idLocalization = idLocalization;
+    }
+
 }
