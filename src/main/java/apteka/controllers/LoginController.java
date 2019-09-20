@@ -88,7 +88,8 @@ public class LoginController {
 
         List<UserType> userType = session.createQuery("from UserType where name = 'Pracownik'").getResultList();
 
-        User newUser = new User(user.getLoginName(), user.getPassword(), userType.get(0));
+        User newUser = new User(user.getLoginName(), user.getPassword(),
+                userType.get(0), user.getName(), user.getSecondName(), user.getSurname(), user.getDateOfBirth());
 
         try {
             session.save(newUser);

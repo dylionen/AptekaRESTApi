@@ -34,6 +34,19 @@ public class User {
     @Column(name = "auth_token")
     private String authToken;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "second_name")
+    private String secondName;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "date_of_birth")
+    private Date dateOfBirth;
+
+
     @Column(name = "created_date")
     @JsonIgnore
     private Date createdDate;
@@ -49,11 +62,11 @@ public class User {
 
 
     @ManyToMany
-    @JoinTable(name = "localizations_users",joinColumns = {@JoinColumn(name = "id_user")},inverseJoinColumns = {@JoinColumn(name = "id_localization")})
+    @JoinTable(name = "localizations_users", joinColumns = {@JoinColumn(name = "id_user")}, inverseJoinColumns = {@JoinColumn(name = "id_localization")})
     private Collection<Localization> localization = new ArrayList<>();
 
 
-    public User(String loginName, String password, UserType userType) {
+    public User(String loginName, String password, UserType userType, String name, String secondName, String surname, Date dateOfBirth) {
         this.loginName = loginName;
         this.password = password;
         SecureRandom secureRandom = new SecureRandom();
@@ -63,6 +76,10 @@ public class User {
         this.authToken = base64Encoder.encodeToString(randomBytes);
         this.createdDate = new Date();
         this.idUserType = userType;
+        this.name = name;
+        this.secondName = secondName;
+        this.surname = surname;
+        this.dateOfBirth = dateOfBirth;
 
     }
 
@@ -136,22 +153,36 @@ public class User {
     public void setLocalization(Collection<Localization> localization) {
         this.localization = localization;
     }
-    /*
-    public void addLocalization(Localization localization) {
-        this.localizations.add(localization);
-        localization.getUsers().add(this);
+
+    public String getName() {
+        return name;
     }
 
-    public void removeLocalization(Localization localization) {
-        this.localizations.remove(localization);
-        localization.getUsers().remove(this);
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Set<Localization> getLocalizations() {
-        return localizations;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setLocalizations(Set<Localization> localizations) {
-        this.localizations = localizations;
-    }*/
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 }

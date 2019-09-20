@@ -74,13 +74,13 @@ public class MovementsController {
     }
 
     @GetMapping("/getPM")
-    public String getPM(@RequestHeader(value = "Authorization") String authId) throws JsonProcessingException {
+    public String getPM(@RequestHeader(value = "Authorization") String authId,@RequestHeader(value = "Localization") int localization) throws JsonProcessingException {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
         List<WHM> WH = null;
 
         try {
-            WH = session.createQuery("from WHM where idTypeWHM = 2").getResultList();
+            WH = session.createQuery("from WHM where idTypeWHM = 2 and idLocalization = " + localization).getResultList();
             System.out.println(WH);
             tx.commit();
         } catch (Exception e) {
