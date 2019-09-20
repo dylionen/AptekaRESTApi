@@ -3,11 +3,12 @@ package apteka.tables;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.apache.tomcat.jni.Local;
+import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.Date;
+import java.util.*;
 import javax.persistence.*;
 
 @Getter
@@ -47,6 +48,11 @@ public class User {
     private int foreignIdUserType;
 
 
+    @ManyToMany
+    @JoinTable(name = "localizations_users",joinColumns = {@JoinColumn(name = "id_user")},inverseJoinColumns = {@JoinColumn(name = "id_localization")})
+    private Collection<Localization> localization = new ArrayList<>();
+
+
     public User(String loginName, String password, UserType userType) {
         this.loginName = loginName;
         this.password = password;
@@ -57,8 +63,8 @@ public class User {
         this.authToken = base64Encoder.encodeToString(randomBytes);
         this.createdDate = new Date();
         this.idUserType = userType;
-    }
 
+    }
 
     public String getLoginName() {
         return loginName;
@@ -123,5 +129,29 @@ public class User {
         this.foreignIdUserType = foreignIdUserType;
     }
 
+    public Collection<Localization> getLocalization() {
+        return localization;
+    }
 
+    public void setLocalization(Collection<Localization> localization) {
+        this.localization = localization;
+    }
+    /*
+    public void addLocalization(Localization localization) {
+        this.localizations.add(localization);
+        localization.getUsers().add(this);
+    }
+
+    public void removeLocalization(Localization localization) {
+        this.localizations.remove(localization);
+        localization.getUsers().remove(this);
+    }
+
+    public Set<Localization> getLocalizations() {
+        return localizations;
+    }
+
+    public void setLocalizations(Set<Localization> localizations) {
+        this.localizations = localizations;
+    }*/
 }

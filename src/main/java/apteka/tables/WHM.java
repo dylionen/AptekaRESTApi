@@ -2,6 +2,7 @@ package apteka.tables;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -45,6 +46,7 @@ public class WHM {
     @ManyToOne
     @JoinColumn(name = "id_localization")
     private Localization idLocalization;
+
 
     public WHM(User idUser, TypesWHM idTypeWHM, Double price, Boolean bufor, Double priceB, String foreignName, Localization idLocalization) {
         this.idUser = idUser;

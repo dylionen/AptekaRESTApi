@@ -36,6 +36,11 @@ public class ArticleController {
             .addAnnotatedClass(User.class)
             .addAnnotatedClass(UserType.class)
             .addAnnotatedClass(Unit.class)
+            .addAnnotatedClass(Localization.class)
+            .addAnnotatedClass(Address.class)
+            .addAnnotatedClass(Contact.class)
+            .addAnnotatedClass(AddressType.class)
+            .addAnnotatedClass(ContactType.class)
             .buildSessionFactory();
 
 

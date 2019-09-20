@@ -1,6 +1,13 @@
 package apteka.tables;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "localizations")
 public class Localization {
@@ -20,6 +27,13 @@ public class Localization {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToMany
+    @JsonIgnore
+    @JoinTable(name = "localizations_users",joinColumns = {@JoinColumn(name = "id_localization")},inverseJoinColumns = {@JoinColumn(name = "id_user")})
+    //@JoinTable(name = "user_localizations", joinColumns = {@JoinColumn(name = "id_localization")}, inverseJoinColumns = {@JoinColumn(name = "id_user")})
+    private List<User> user = new ArrayList<>();
+
 
     public Localization(Address idAddress, Contact idContact, String name) {
         this.idAddress = idAddress;
@@ -63,4 +77,30 @@ public class Localization {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<User> getUser() {
+        return user;
+    }
+
+    public void setUser(List<User> user) {
+        this.user = user;
+    }
+    /*
+    public void addUser(User user) {
+        this.users.add(user);
+        user.getLocalizations().add(this);
+    }
+
+    public void removeUser(User user) {
+        this.users.remove(user);
+        user.getLocalizations().remove(this);
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }*/
 }
