@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,10 @@ public class ArticleController {
             .addAnnotatedClass(Contact.class)
             .addAnnotatedClass(AddressType.class)
             .addAnnotatedClass(ContactType.class)
+            .addAnnotatedClass(WHM.class)
+            .addAnnotatedClass(WHMList.class)
+            .addAnnotatedClass(VATTable.class)
+            .addAnnotatedClass(TypesWHM.class)
             .buildSessionFactory();
 
 
@@ -60,14 +65,26 @@ public class ArticleController {
 
     //pobranie wszystkich artykułów
     @GetMapping("/articles")
-    public String getAllArticles() throws JsonProcessingException {
+    public String getAllArticles(@RequestHeader(value = "Localization") int localization,
+                                 @RequestHeader(value = "Authorization") String authId) throws JsonProcessingException {
         Session session = sessionArticleFactory.getCurrentSession();
         List<Article> articles = null;
 
         Transaction tx = session.beginTransaction();
+        Query sumQuery;
+        double quantity;
 
         try {
             articles = session.createQuery("from Article where archived = false").getResultList();
+
+
+            for (Article article : articles) {
+                sumQuery = session.createQuery(
+                        "select SUM(value) from WHMList wl where idArticle = " + article.getIdArticle() + " and  wl.idWHM.idLocalization = " + localization);
+                quantity = sumQuery.list().get(0) != null ? Double.valueOf(sumQuery.list().get(0).toString()) : 0.0;
+                article.setQuantity((int) quantity);
+
+            }
 
         } catch (Exception e) {
             tx.rollback();
@@ -79,9 +96,10 @@ public class ArticleController {
         }
         return objectMapper.writeValueAsString(articles);
     }
+
     //pobranie konkretnego artykułu
     @GetMapping("/articles/{id}")
-    public String getActualArticle(@RequestHeader(value = "Authorization") String authId,@PathVariable(value ="id") int id) throws JsonProcessingException {
+    public String getActualArticle(@RequestHeader(value = "Authorization") String authId, @PathVariable(value = "id") int id) throws JsonProcessingException {
         Session session = sessionArticleFactory.getCurrentSession();
         List<Article> articles = null;
 
@@ -98,6 +116,7 @@ public class ArticleController {
         }
         return objectMapper.writeValueAsString(articles);
     }
+
     //Dodanie nowego artykułu
     @PostMapping("/articles")
     public String createArticle(@RequestHeader(value = "Authorization") String authId, @RequestBody Article newArticle) {
@@ -116,13 +135,15 @@ public class ArticleController {
                 unitList.get(0),
                 newArticle.getForeignUnit(),
                 userList.get(0),
-                newArticle.getDescription());
+                newArticle.getDescription(),
+                0);
         session.save(article);
 
         session.getTransaction().commit();
         session.close();
         return article.getIdArticle() + "";
     }
+
     //Aktualizacja artykułu
     @PutMapping("/articles/{id}")
     public ResponseEntity updateArticle(@PathVariable int id, @RequestHeader(value = "Authorization") String authId, @RequestBody Article newArticle) {
@@ -147,12 +168,12 @@ public class ArticleController {
         }
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
     //pobranie zdjęcia
     @GetMapping("/articles/logo/{id}")
     public ResponseEntity<byte[]> getImage(@PathVariable int id) {
         Session session = sessionArticleFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-
 
 
         List<Article> unitArticle = session.createQuery("from Article where  idArticle = " + id).getResultList();
@@ -161,6 +182,7 @@ public class ArticleController {
         byte[] image = unitArticle.get(0).getPhoto();
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
     }
+
     //dodanie loga do konkretnego artykułu
     @PostMapping("/articles/addLogo/{id}")
     public ResponseEntity updateArticleLogo(@PathVariable int id, @RequestParam("avatar") MultipartFile file) {

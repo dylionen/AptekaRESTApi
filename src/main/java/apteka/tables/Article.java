@@ -53,11 +53,14 @@ public class Article {
     @Column(name = "archived")
     private boolean archived;
 
+    @Column(name = "quantity")
+    private int quantity;
+
     public Article() {
 
     }
 
-    public Article(String name, double price, Unit idUnit, int foreignUnit, User idUser, String description) {
+    public Article(String name, double price, Unit idUnit, int foreignUnit, User idUser, String description, int quantity) {
         this.name = name;
         this.price = price;
         this.idUnit = idUnit;
@@ -66,6 +69,15 @@ public class Article {
         this.description = description;
         this.createdDate = new Date();
         this.archived = false;
+        this.quantity = quantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getForeignUnit() {

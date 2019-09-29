@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -74,7 +75,7 @@ public class MovementsController {
     }
 
     @GetMapping("/getPM")
-    public String getPM(@RequestHeader(value = "Authorization") String authId,@RequestHeader(value = "Localization") int localization) throws JsonProcessingException {
+    public String getPM(@RequestHeader(value = "Authorization") String authId, @RequestHeader(value = "Localization") int localization) throws JsonProcessingException {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
         List<WHM> WH = null;
@@ -183,6 +184,48 @@ public class MovementsController {
             //session.getTransaction().commit();
         }
         return objectMapper.writeValueAsString(vatTables);
+    }
+
+
+    @PutMapping("/confirmPW/{WHMid}")
+    public ResponseEntity confirmPw(@RequestHeader(value = "Localization") int localization, @PathVariable int WHMid) throws JsonProcessingException {
+
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        List<WHM> whmList = session.createQuery("from WHM where idWh = " + WHMid + " and  idLocalization  = " + localization).getResultList();
+        if (whmList.size() != 1) {
+            return new ResponseEntity<>(
+                    "Brak dokumentu o przesłanych parametrach.",
+                    HttpStatus.BAD_REQUEST);
+        }
+        WHM whm = whmList.get(0);
+        whm.setBufor(false);
+        session.getTransaction().commit();
+        session.close();
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping("/countArticle/{ArticleId}")
+    public String countArticle(@RequestHeader(value = "Localization") int localization,
+                                       @RequestHeader(value = "Authorization") String authId, @PathVariable String ArticleId) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        User user = AuthValidator.getAuth(authId);
+        if (user == null) return "Nieprawidlowe";
+
+
+        System.out.println(localization);
+
+        Query sumQuery = session.createQuery(
+                "select SUM(value) from WHMList wl where idArticle = " + ArticleId + " and  wl.idWHM.idLocalization = " + localization);
+        Double ilosc = sumQuery.list().get(0) != null ? Double.valueOf(sumQuery.list().get(0).toString()) : 0.0;
+        session.getTransaction().commit();
+        session.close();
+
+
+        return ilosc.toString();
     }
 
 }
