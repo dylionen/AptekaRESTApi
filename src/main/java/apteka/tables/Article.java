@@ -56,11 +56,22 @@ public class Article {
     @Column(name = "quantity")
     private int quantity;
 
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "id_localization")
+    private Localization idLocalization;
+
+
+    @Column(name = "id_localization", insertable = false, updatable = false)
+    @JsonProperty("idLocalization")
+    private int foreignLocalization;
+
+
     public Article() {
 
     }
 
-    public Article(String name, double price, Unit idUnit, int foreignUnit, User idUser, String description, int quantity) {
+    public Article(String name, double price, Unit idUnit, int foreignUnit, User idUser, String description, int quantity, Localization localization) {
         this.name = name;
         this.price = price;
         this.idUnit = idUnit;
@@ -70,10 +81,28 @@ public class Article {
         this.createdDate = new Date();
         this.archived = false;
         this.quantity = quantity;
+        this.idLocalization = localization;
     }
 
     public int getQuantity() {
         return quantity;
+    }
+
+
+    public Localization getIdLocalization() {
+        return idLocalization;
+    }
+
+    public void setIdLocalization(Localization idLocalization) {
+        this.idLocalization = idLocalization;
+    }
+
+    public int getForeignLocalization() {
+        return foreignLocalization;
+    }
+
+    public void setForeignLocalization(int foreignLocalization) {
+        this.foreignLocalization = foreignLocalization;
     }
 
     public void setQuantity(int quantity) {

@@ -50,6 +50,8 @@ public class LoginController {
     }
 
     //Pobranie wszystkich userów z bazy
+
+   /*
     @GetMapping("/users")
     public ResponseEntity getUsers() throws JsonProcessingException {
         Session session = sessionUserFactory.getCurrentSession();
@@ -60,26 +62,8 @@ public class LoginController {
         List<User> users = session.createQuery("from User").getResultList();
         session.getTransaction().commit();
         return ResponseEntity.ok(objectMapper.writeValueAsString(users));
-
-
-        /*
-        Session session = sessionUserFactory.getCurrentSession();
-        List<User> userList = null;
-        Transaction tx = session.beginTransaction();
-        try {
-            userList = session.createQuery("from User").list();
-            session.getTransaction().commit();
-            for (User s:userList){
-                System.out.println(s.getCreatedDate());
-            }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return objectMapper.writeValueAsString(userList);
-        */
     }
-
+*/
     //utworzenie nowego usera
     @PostMapping("/users")
     public ResponseEntity createUser(@RequestBody User user) throws JsonProcessingException {

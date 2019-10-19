@@ -1,6 +1,7 @@
 package apteka.controllers;
 
 import apteka.functionality.AuthValidator;
+import apteka.functionality.FixStocks;
 import apteka.tables.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -49,7 +51,7 @@ public class MovementsController {
         List<TypesWHM> typesWHMS = session.createQuery("from TypesWHM where id_whmtype = 1").getResultList();
         List<Localization> listLocalizations = session.createQuery("from Localization").getResultList();
 
-        WHM whm = new WHM(user, typesWHMS.get(0), 0.0, false, 0.0, "T", listLocalizations.get(0));
+        WHM whm = new WHM(user, typesWHMS.get(0), 0.0, false, 0.0, "T", listLocalizations.get(0), new Date());
         session.save(whm);
         session.getTransaction().commit();
         return whm.getIdWh();
@@ -57,7 +59,10 @@ public class MovementsController {
 
 
     @PostMapping("/createPM")
-    public int createPM(@RequestHeader(value = "Authorization") String authId, @RequestBody WHM jsonWHM) {
+    public int createPM(@RequestHeader(value = "Authorization") String authId,
+                        @RequestHeader(value = "Localization") int localization,
+                        @RequestBody WHM jsonWHM) {
+
         System.out.println(jsonWHM.getForeignName());
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
@@ -66,9 +71,10 @@ public class MovementsController {
         if (user == null) return -1;
 
         List<TypesWHM> typesWHMS = session.createQuery("from TypesWHM where id_whmtype = 2").getResultList();
-        List<Localization> listLocalizations = session.createQuery("from Localization").getResultList();
+        List<Localization> listLocalizations = session.createQuery("from Localization where idLocalization = " + localization).getResultList();
 
-        WHM whm = new WHM(user, typesWHMS.get(0), jsonWHM.getPrice(), false, jsonWHM.getPriceB(), jsonWHM.getForeignName(), listLocalizations.get(0));
+        WHM whm = new WHM(user, typesWHMS.get(0), jsonWHM.getPrice(), false, jsonWHM.getPriceB(),
+                jsonWHM.getForeignName(), listLocalizations.get(0), new Date());
         session.save(whm);
         session.getTransaction().commit();
         return whm.getIdWh();
@@ -81,7 +87,7 @@ public class MovementsController {
         List<WHM> WH = null;
 
         try {
-            WH = session.createQuery("from WHM where idTypeWHM = 2 and idLocalization = " + localization).getResultList();
+            WH = session.createQuery("from WHM where idTypeWHM = 2 and idLocalization = " + localization + " order by createdDate DESC").getResultList();
             System.out.println(WH);
             tx.commit();
         } catch (Exception e) {
@@ -133,7 +139,9 @@ public class MovementsController {
 
 
     @PostMapping("/createWMArticlesList/{WHMid}")
-    public ResponseEntity createWMArticlesList(@PathVariable int WHMid, @RequestHeader(value = "Authorization") String authId, @RequestBody List<WHMList> whmList) throws JsonProcessingException {
+    public ResponseEntity createWMArticlesList(@PathVariable int WHMid, @RequestHeader(value = "Authorization") String authId,
+                                               @RequestBody List<WHMList> whmList, @RequestHeader(value = "Localization") int localization)
+            throws JsonProcessingException {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
@@ -159,6 +167,9 @@ public class MovementsController {
             WHMListOne = new WHMList(articles.get(0), whm.get(0), whTmp.getValue(), vat.get(0), whTmp.getPrice());
             whmNewList.add(WHMListOne);
             session.save(WHMListOne);
+
+            //Chwilowo brak zasotosowania
+            //FixStocks.calculateQuantity(whTmp.getForeignIdArticle(),localization);
         }
 
         tx.commit();
@@ -188,11 +199,11 @@ public class MovementsController {
 
 
     @PutMapping("/confirmPW/{WHMid}")
-    public ResponseEntity confirmPw(@RequestHeader(value = "Localization") int localization, @PathVariable int WHMid) throws JsonProcessingException {
+    public ResponseEntity confirmPw(@PathVariable int WHMid) throws JsonProcessingException {
 
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        List<WHM> whmList = session.createQuery("from WHM where idWh = " + WHMid + " and  idLocalization  = " + localization).getResultList();
+        List<WHM> whmList = session.createQuery("from WHM where idWh = " + WHMid).getResultList();
         if (whmList.size() != 1) {
             return new ResponseEntity<>(
                     "Brak dokumentu o przesłanych parametrach.",
@@ -200,15 +211,18 @@ public class MovementsController {
         }
         WHM whm = whmList.get(0);
         whm.setBufor(false);
+
+
         session.getTransaction().commit();
         session.close();
+        FixStocks.calculateQuantityOfCurrentWHM(whm.getIdWh());
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/countArticle/{ArticleId}")
     public String countArticle(@RequestHeader(value = "Localization") int localization,
-                                       @RequestHeader(value = "Authorization") String authId, @PathVariable String ArticleId) {
+                               @RequestHeader(value = "Authorization") String authId, @PathVariable String ArticleId) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 

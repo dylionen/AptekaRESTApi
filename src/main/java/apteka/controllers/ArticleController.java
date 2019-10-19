@@ -75,16 +75,8 @@ public class ArticleController {
         double quantity;
 
         try {
-            articles = session.createQuery("from Article where archived = false").getResultList();
+            articles = session.createQuery("from Article where archived = false and foreignLocalization = " + localization).getResultList();
 
-
-            for (Article article : articles) {
-                sumQuery = session.createQuery(
-                        "select SUM(value) from WHMList wl where idArticle = " + article.getIdArticle() + " and  wl.idWHM.idLocalization = " + localization);
-                quantity = sumQuery.list().get(0) != null ? Double.valueOf(sumQuery.list().get(0).toString()) : 0.0;
-                article.setQuantity((int) quantity);
-
-            }
 
         } catch (Exception e) {
             tx.rollback();
@@ -119,16 +111,28 @@ public class ArticleController {
 
     //Dodanie nowego artykułu
     @PostMapping("/articles")
-    public String createArticle(@RequestHeader(value = "Authorization") String authId, @RequestBody Article newArticle) {
+    public String createArticle(@RequestHeader(value = "Authorization") String authId, @RequestBody Article newArticle,
+                                @RequestHeader(value = "Localization") int localization) {
         Session session = sessionArticleFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
-        List<User> userList = session.createQuery("from User where authToken = '" + authId + "'").getResultList();
+
+        System.out.println("AuthToken: " + authId);
+
+        List<User> userList = session.createQuery("from User").getResultList();
         if (userList.size() == 0) {
             return "Error, user not found.";
         }
 
         List<Unit> unitList = session.createQuery("from Unit where idUnit = " + newArticle.getForeignUnit()).getResultList();
+        if (unitList.size() == 0) {
+            return "Error, unit not found.";
+        }
+
+        List<Localization> localizationList = session.createQuery("from Localization where id = " + localization).getResultList();
+        if (localizationList.size() == 0) {
+            return "Error, localization not found.";
+        }
 
         System.out.println(newArticle);
         Article article = new Article(newArticle.getName(), newArticle.getPrice(),
@@ -136,7 +140,7 @@ public class ArticleController {
                 newArticle.getForeignUnit(),
                 userList.get(0),
                 newArticle.getDescription(),
-                0);
+                0,localizationList.get(0));
         session.save(article);
 
         session.getTransaction().commit();

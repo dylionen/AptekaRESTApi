@@ -48,15 +48,21 @@ public class WHM {
     private Localization idLocalization;
 
 
-    public WHM(User idUser, TypesWHM idTypeWHM, Double price, Boolean bufor, Double priceB, String foreignName, Localization idLocalization) {
+    @Column(name = "id_localization", insertable = false, updatable = false)
+    @JsonIgnore
+    @JsonProperty("id_localization")
+    private int foreignLocalization;
+
+
+    public WHM(User idUser, TypesWHM idTypeWHM, Double price, Boolean bufor, Double priceB, String foreignName, Localization idLocalization,Date createdDate) {
         this.idUser = idUser;
         this.idTypeWHM = idTypeWHM;
         this.idLocalization = idLocalization;
-        this.createdDate = new Date();
         this.bufor = bufor;
         this.price = price;
         this.priceB = priceB;
         this.foreignName = foreignName;
+        this.createdDate = createdDate;
     }
 
     public WHM() {
@@ -142,4 +148,11 @@ public class WHM {
         this.idLocalization = idLocalization;
     }
 
+    public int getForeignLocalization() {
+        return foreignLocalization;
+    }
+
+    public void setForeignLocalization(int foreignLocalization) {
+        this.foreignLocalization = foreignLocalization;
+    }
 }
