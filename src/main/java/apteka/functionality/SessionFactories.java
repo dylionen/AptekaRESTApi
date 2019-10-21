@@ -21,6 +21,7 @@ public class SessionFactories {
                 .addAnnotatedClass(WHMList.class)
                 .addAnnotatedClass(VATTable.class)
                 .addAnnotatedClass(TypesWHM.class)
+                .addAnnotatedClass(Numerator.class)
                 .buildSessionFactory();
     }
 }

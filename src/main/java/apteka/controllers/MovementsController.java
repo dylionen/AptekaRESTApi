@@ -73,10 +73,15 @@ public class MovementsController {
         List<TypesWHM> typesWHMS = session.createQuery("from TypesWHM where id_whmtype = 2").getResultList();
         List<Localization> listLocalizations = session.createQuery("from Localization where idLocalization = " + localization).getResultList();
 
-        WHM whm = new WHM(user, typesWHMS.get(0), jsonWHM.getPrice(), false, jsonWHM.getPriceB(),
+        WHM whm = new WHM(user, typesWHMS.get(0), jsonWHM.getPrice(), jsonWHM.isBufor(), jsonWHM.getPriceB(),
                 jsonWHM.getForeignName(), listLocalizations.get(0), new Date());
         session.save(whm);
         session.getTransaction().commit();
+
+        if (!jsonWHM.isBufor()) {
+            FixStocks.calculateQuantityOfCurrentWHM(whm.getIdWh());
+        }
+
         return whm.getIdWh();
     }
 

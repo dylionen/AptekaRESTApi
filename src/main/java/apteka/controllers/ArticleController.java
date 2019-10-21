@@ -1,6 +1,7 @@
 package apteka.controllers;
 
 import apteka.functionality.AuthValidator;
+import apteka.functionality.NumeratorFunctions;
 import apteka.tables.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -69,6 +70,8 @@ public class ArticleController {
                                  @RequestHeader(value = "Authorization") String authId) throws JsonProcessingException {
         Session session = sessionArticleFactory.getCurrentSession();
         List<Article> articles = null;
+
+        System.out.println(NumeratorFunctions.getNumeratorString(new Date(), 1,2));
 
         Transaction tx = session.beginTransaction();
         Query sumQuery;

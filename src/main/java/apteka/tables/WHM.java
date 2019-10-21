@@ -1,5 +1,6 @@
 package apteka.tables;
 
+import apteka.functionality.NumeratorFunctions;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jdk.nashorn.internal.ir.annotations.Ignore;
@@ -53,8 +54,12 @@ public class WHM {
     @JsonProperty("id_localization")
     private int foreignLocalization;
 
+    @Column(name = "numberstring")
+    private String numberString;
 
-    public WHM(User idUser, TypesWHM idTypeWHM, Double price, Boolean bufor, Double priceB, String foreignName, Localization idLocalization,Date createdDate) {
+
+    public WHM(User idUser, TypesWHM idTypeWHM, Double price, Boolean bufor, Double priceB, String foreignName,
+               Localization idLocalization, Date createdDate) {
         this.idUser = idUser;
         this.idTypeWHM = idTypeWHM;
         this.idLocalization = idLocalization;
@@ -63,9 +68,18 @@ public class WHM {
         this.priceB = priceB;
         this.foreignName = foreignName;
         this.createdDate = createdDate;
+        this.numberString = NumeratorFunctions.getNumeratorString(createdDate, idLocalization.getIdLocalization(), idTypeWHM.getId_whmtype());
     }
 
     public WHM() {
+    }
+
+    public String getNumberString() {
+        return numberString;
+    }
+
+    public void setNumberString(String numberString) {
+        this.numberString = numberString;
     }
 
     public User getIdUser() {
@@ -155,4 +169,6 @@ public class WHM {
     public void setForeignLocalization(int foreignLocalization) {
         this.foreignLocalization = foreignLocalization;
     }
+
+
 }
