@@ -18,23 +18,30 @@ public class NumeratorFunctions {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
-        String returnValue = null;
+        String returnValue;
+        Numerator numerator;
+
 
         List<Numerator> numeratorList = session.createQuery("from Numerator num where num.idLocalization.idLocalization = "
                 + idLocalization + " and num.idWHMType.id_whmtype = " + documentType).getResultList();
 
+        if (numeratorList.size() == 1) {
+            numerator = numeratorList.get(0);
+        } else {
+            numerator = null;
+            return "error";
+        }
 
-        validateNumerator(numeratorList.get(0), date);
-        returnValue = "PW/" + numeratorList.get(0).getValue() + "/" + numeratorList.get(0).getLastUseMonth()
-                + "/" + numeratorList.get(0).getLastUseYear() + "/" + idLocalization;
-        incrementCounter(numeratorList.get(0));
+        validateNumerator(numerator, date);
+
+        returnValue = String.format("%s/%d/%d/%d/%s", numerator.getIdWHMType().getAkronim(),
+                numerator.getValue(), numerator.getLastUseMonth(), numerator.getLastUseYear(), numerator.getIdLocalization().getAkronim());
+
+        incrementCounter(numerator);
         session.getTransaction().commit();
         session.close();
 
-
         return returnValue;
-
-
     }
 
     private static void validateNumerator(Numerator numerator, Date date) {
@@ -42,11 +49,11 @@ public class NumeratorFunctions {
         calendar.setTime(date);
 
         if (calendar.get(Calendar.YEAR) > numerator.getLastUseYear()) {
-            numerator.setLastUseYear(calendar.get(Calendar.YEAR) );
-            numerator.setLastUseMonth(calendar.get(Calendar.MONTH) );
+            numerator.setLastUseYear(calendar.get(Calendar.YEAR));
+            numerator.setLastUseMonth(calendar.get(Calendar.MONTH));
             resetCounter(numerator);
-        } else if (calendar.get(Calendar.MONTH)  > numerator.getLastUseMonth()) {
-            numerator.setLastUseMonth(calendar.get(Calendar.MONTH) );
+        } else if (calendar.get(Calendar.MONTH) > numerator.getLastUseMonth()) {
+            numerator.setLastUseMonth(calendar.get(Calendar.MONTH));
             resetCounter(numerator);
         }
     }

@@ -28,23 +28,34 @@ public class Localization {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "akronim")
+    private String akronim;
+
     @ManyToMany
     @JsonIgnore
-    @JoinTable(name = "localizations_users",joinColumns = {@JoinColumn(name = "id_localization")},inverseJoinColumns = {@JoinColumn(name = "id_user")})
+    @JoinTable(name = "localizations_users", joinColumns = {@JoinColumn(name = "id_localization")}, inverseJoinColumns = {@JoinColumn(name = "id_user")})
     //@JoinTable(name = "user_localizations", joinColumns = {@JoinColumn(name = "id_localization")}, inverseJoinColumns = {@JoinColumn(name = "id_user")})
     private List<User> user = new ArrayList<>();
 
 
-    public Localization(Address idAddress, Contact idContact, String name) {
+    public Localization(Address idAddress, Contact idContact, String name, String akronim) {
         this.idAddress = idAddress;
         this.idContact = idContact;
         this.name = name;
+        this.akronim = akronim;
     }
 
     public Localization() {
 
     }
 
+    public String getAkronim() {
+        return akronim;
+    }
+
+    public void setAkronim(String akronim) {
+        this.akronim = akronim;
+    }
 
     public int getIdLocalization() {
         return idLocalization;

@@ -13,11 +13,23 @@ public class TypesWHM {
     @Column(name = "value")
     private String value;
 
+    @Column(name = "akronim")
+    private String akronim;
+
     public TypesWHM() {
     }
 
-    public TypesWHM(String value) {
+    public TypesWHM(String value, String akronim) {
         this.value = value;
+        this.akronim = akronim;
+    }
+
+    public String getAkronim() {
+        return akronim;
+    }
+
+    public void setAkronim(String akronim) {
+        this.akronim = akronim;
     }
 
     public int getId_whmtype() {
