@@ -71,7 +71,7 @@ public class ArticleController {
         Session session = sessionArticleFactory.getCurrentSession();
         List<Article> articles = null;
 
-        System.out.println(NumeratorFunctions.getNumeratorString(new Date(), 1,2));
+        System.out.println(NumeratorFunctions.getNumeratorString(new Date(), 1, 2));
 
         Transaction tx = session.beginTransaction();
         Query sumQuery;
@@ -80,7 +80,6 @@ public class ArticleController {
         try {
             articles = session.createQuery("from Article where archived = false and foreignLocalization = " + localization).getResultList();
 
-
         } catch (Exception e) {
             tx.rollback();
             return e.getMessage();
@@ -88,6 +87,26 @@ public class ArticleController {
             session.getTransaction().commit();
             session.close();
             //session.getTransaction().commit();
+        }
+        return objectMapper.writeValueAsString(articles);
+    }
+
+
+    @GetMapping("/notnullarticles")
+    public String getNotNullArticles(@RequestHeader(value = "Localization") int localization,
+                                     @RequestHeader(value = "Authorization") String authId) throws JsonProcessingException {
+        Session session = sessionArticleFactory.getCurrentSession();
+        List<Article> articles = null;
+        Transaction tx = session.beginTransaction();
+        try {
+            articles = session.createQuery("from Article where archived = false " +
+                    "and foreignLocalization = " + localization + " and quantity>0").getResultList();
+        } catch (Exception e) {
+            tx.rollback();
+            return e.getMessage();
+        } finally {
+            session.getTransaction().commit();
+            session.close();
         }
         return objectMapper.writeValueAsString(articles);
     }
@@ -143,7 +162,7 @@ public class ArticleController {
                 newArticle.getForeignUnit(),
                 userList.get(0),
                 newArticle.getDescription(),
-                0,localizationList.get(0));
+                0, localizationList.get(0));
         session.save(article);
 
         session.getTransaction().commit();

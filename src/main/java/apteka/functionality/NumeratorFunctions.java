@@ -35,7 +35,7 @@ public class NumeratorFunctions {
         validateNumerator(numerator, date);
 
         returnValue = String.format("%s/%d/%d/%d/%s", numerator.getIdWHMType().getAkronim(),
-                numerator.getValue(), numerator.getLastUseMonth(), numerator.getLastUseYear(), numerator.getIdLocalization().getAkronim());
+                numerator.getValue(), numerator.getLastUseMonth() + 1, numerator.getLastUseYear(), numerator.getIdLocalization().getAkronim());
 
         incrementCounter(numerator);
         session.getTransaction().commit();

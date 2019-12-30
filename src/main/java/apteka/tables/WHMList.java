@@ -17,8 +17,8 @@ public class WHMList {
     private int idWHList;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "article_id")
+    @JsonProperty("idArticleValue")
     private Article idArticle;
 
     @Column(name = "article_id", insertable = false, updatable = false)
@@ -50,12 +50,16 @@ public class WHMList {
     @Column(name = "price")
     private double price;
 
-    public WHMList(Article idArticle, WHM idWHM, double value, VATTable idVATTable, double price) {
+    @Column(name = "priceb")
+    private double priceB;
+
+    public WHMList(Article idArticle, WHM idWHM, double value, VATTable idVATTable, double price,double priceB) {
         this.idArticle = idArticle;
         this.idWHM = idWHM;
         this.value = value;
         this.idVATTable = idVATTable;
         this.price = price;
+        this.priceB = priceB;
 /*
         this.foreignIdArticle = idArticle.getIdArticle();
         this.foreignIdWHM = idWHM.getIdWh();
@@ -86,12 +90,13 @@ public class WHMList {
         this.foreignIdVATTable = foreignIdVATTable;
     }
 
-    public WHMList(int foreignIdArticle, int foreignIdWHM, double value, int foreignIdVATTable, double price) {
+    public WHMList(int foreignIdArticle, int foreignIdWHM, double value, int foreignIdVATTable, double price,double priceB) {
         this.foreignIdArticle = foreignIdArticle;
         this.foreignIdWHM = foreignIdWHM;
         this.value = value;
         this.foreignIdVATTable = foreignIdVATTable;
         this.price = price;
+        this.priceB = priceB;
     }
 
     public WHMList() {
@@ -143,5 +148,13 @@ public class WHMList {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public double getPriceB() {
+        return priceB;
+    }
+
+    public void setPriceB(double priceB) {
+        this.priceB = priceB;
     }
 }

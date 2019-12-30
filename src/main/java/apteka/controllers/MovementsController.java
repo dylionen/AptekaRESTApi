@@ -41,7 +41,10 @@ public class MovementsController {
     ObjectMapper objectMapper = new ObjectMapper();
 
     @PostMapping("/createWM")
-    public int createWM(@RequestHeader(value = "Authorization") String authId) {
+    public int createWM(@RequestHeader(value = "Authorization") String authId,
+                        @RequestHeader(value = "Localization") int localization,
+                        @RequestBody WHM jsonWHM) {
+        System.out.println(jsonWHM.getForeignName());
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
@@ -49,14 +52,38 @@ public class MovementsController {
         if (user == null) return -1;
 
         List<TypesWHM> typesWHMS = session.createQuery("from TypesWHM where id_whmtype = 1").getResultList();
-        List<Localization> listLocalizations = session.createQuery("from Localization").getResultList();
+        List<Localization> listLocalizations = session.createQuery("from Localization where idLocalization = " + localization).getResultList();
 
-        WHM whm = new WHM(user, typesWHMS.get(0), 0.0, false, 0.0, "T", listLocalizations.get(0), new Date());
+        WHM whm = new WHM(user, typesWHMS.get(0), jsonWHM.getPrice(), jsonWHM.isBufor(), jsonWHM.getPriceB(),
+                jsonWHM.getForeignName(), listLocalizations.get(0), new Date());
         session.save(whm);
         session.getTransaction().commit();
+
+        if (!jsonWHM.isBufor()) {
+            FixStocks.calculateQuantityOfCurrentWHM(whm.getIdWh());
+        }
+
         return whm.getIdWh();
     }
 
+    @GetMapping("/getWM")
+    public String getWM(@RequestHeader(value = "Authorization") String authId, @RequestHeader(value = "Localization") int localization) throws JsonProcessingException {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        List<WHM> WH = null;
+
+        try {
+            WH = session.createQuery("from WHM where idTypeWHM = 1 and idLocalization = " + localization + " order by createdDate DESC ").getResultList();
+            System.out.println(WH);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            return e.getMessage();
+        } finally {
+            //session.getTransaction().commit();
+        }
+        return objectMapper.writeValueAsString(WH);
+    }
 
     @PostMapping("/createPM")
     public int createPM(@RequestHeader(value = "Authorization") String authId,
@@ -149,14 +176,15 @@ public class MovementsController {
             throws JsonProcessingException {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-
+        System.out.println("Jestem tutaj1");
         List<WHM> whm = session.createQuery("from WHM where idWh =" + WHMid).getResultList();
 
         List<WHMList> whmNewList = new LinkedList<>();
         WHMList WHMListOne = null;
-
+        System.out.println("Jestem tutaj2");
         List<Article> articles;
         List<VATTable> vat;
+
         System.out.println(Arrays.toString(whmList.toArray()));
 
 
@@ -169,7 +197,7 @@ public class MovementsController {
             vat = session.createQuery("from VATTable where idVat = " + whTmp.getForeignIdVATTable()).getResultList();
 
 
-            WHMListOne = new WHMList(articles.get(0), whm.get(0), whTmp.getValue(), vat.get(0), whTmp.getPrice());
+            WHMListOne = new WHMList(articles.get(0), whm.get(0), whTmp.getValue(), vat.get(0), whTmp.getPrice(), whTmp.getPriceB());
             whmNewList.add(WHMListOne);
             session.save(WHMListOne);
 

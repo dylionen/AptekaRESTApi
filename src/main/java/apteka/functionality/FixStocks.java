@@ -37,19 +37,29 @@ public class FixStocks {
 
         Session session = sessionArticleFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        Query sumQuery;
-        double quantity;
+        Query sumQueryForPM;
+        Query sumQueryForWM;
+        double quantityForPM;
+        double quantityForWM;
 
         List<Article> articleList = session.createQuery("from Article where foreignLocalization = " + idLocalization
                 + " and idArticle = " + idArticle).getResultList();
 
-        sumQuery = session.createQuery(
-                "select SUM(value) from WHMList wl where  idArticle = " + articleList.get(0).getIdArticle() +
-                        " and  wl.idWHM.idLocalization = " + idLocalization + " and wl.idWHM.bufor = false");
-        quantity = sumQuery.list().get(0) != null ? Double.valueOf(sumQuery.list().get(0).toString()) : 0.0;
-        articleList.get(0).setQuantity((int) quantity);
 
+        sumQueryForPM = session.createQuery(
+                "select SUM(value) from WHMList wl where  idArticle = " + articleList.get(0).getIdArticle() +
+                        " and  wl.idWHM.idLocalization = " + idLocalization + " and wl.idWHM.bufor = false and wl.idWHM.idTypeWHM.id_whmtype = 2 ");
+        quantityForPM = sumQueryForPM.list().get(0) != null ? Double.valueOf(sumQueryForPM.list().get(0).toString()) : 0.0;
+
+        sumQueryForWM = session.createQuery(
+                "select SUM(value) from WHMList wl where  idArticle = " + articleList.get(0).getIdArticle() +
+                        " and  wl.idWHM.idLocalization = " + idLocalization + " and wl.idWHM.bufor = false and wl.idWHM.idTypeWHM.id_whmtype = 1 ");
+        quantityForWM = sumQueryForWM.list().get(0) != null ? Double.valueOf(sumQueryForWM.list().get(0).toString()) : 0.0;
+
+        articleList.get(0).setQuantity((int) (quantityForPM - quantityForWM));
+        System.out.println("PM: " + quantityForPM + "   WM: " + quantityForWM);
         session.getTransaction().commit();
     }
 
 }
+

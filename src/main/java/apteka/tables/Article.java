@@ -24,8 +24,8 @@ public class Article {
     private double price;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "id_unit")
+    @JsonProperty("unitValue")
     private Unit idUnit;
 
     @Column(name = "id_unit", insertable = false, updatable = false)
