@@ -4,6 +4,7 @@ import apteka.functionality.AuthValidator;
 import apteka.tables.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.tomcat.jni.Local;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -33,6 +35,7 @@ public class LocalizationController {
             .addAnnotatedClass(AddressType.class)
             .addAnnotatedClass(Contact.class)
             .addAnnotatedClass(ContactType.class)
+            .addAnnotatedClass(UserLocalizations.class)
             .buildSessionFactory();
 
     @Autowired
@@ -53,6 +56,20 @@ public class LocalizationController {
 
 
         return objectMapper.writeValueAsString(userLocalizationsList);
+    }
+
+    @GetMapping("/currentuserlocalizations/{idUser}")
+    public String getCurrentUserLocalizations(@RequestHeader(value = "Authorization") String authId, @PathVariable int idUser) throws JsonProcessingException {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        User user = AuthValidator.getAuth(authId);
+        if (user == null) return "Validate user failed";
+
+        Collection<Localization> localizations = user.getLocalization();
+        session.getTransaction().commit();
+
+        return objectMapper.writeValueAsString(localizations);
     }
 
 

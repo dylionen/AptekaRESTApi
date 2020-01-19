@@ -119,7 +119,7 @@ public class MovementsController {
         List<WHM> WH = null;
 
         try {
-            WH = session.createQuery("from WHM where idTypeWHM = 2 and idLocalization = " + localization + " order by createdDate DESC ").getResultList();
+            WH = session.createQuery("from WHM where idTypeWHM = 2  and idLocalization = " + localization + " order by createdDate DESC ").getResultList();
             System.out.println(WH);
             tx.commit();
         } catch (Exception e) {
