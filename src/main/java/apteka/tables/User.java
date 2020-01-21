@@ -1,15 +1,13 @@
 package apteka.tables;
 
+import apteka.functionality.CodersClass;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.apache.tomcat.jni.Local;
-import org.hibernate.annotations.ManyToAny;
 
 import javax.persistence.*;
 import java.security.SecureRandom;
 import java.util.*;
-import javax.persistence.*;
 
 @Getter
 @Setter
@@ -68,12 +66,8 @@ public class User {
 
     public User(String loginName, String password, UserType userType, String name, String secondName, String surname, Date dateOfBirth) {
         this.loginName = loginName;
-        this.password = password;
-        SecureRandom secureRandom = new SecureRandom();
-        Base64.Encoder base64Encoder = Base64.getUrlEncoder();
-        byte[] randomBytes = new byte[24];
-        secureRandom.nextBytes(randomBytes);
-        this.authToken = base64Encoder.encodeToString(randomBytes);
+        this.password = CodersClass.MD5Code(password);
+        this.authToken = CodersClass.authTokenGenerator();
         this.createdDate = new Date();
         this.idUserType = userType;
         this.name = name;
@@ -96,7 +90,7 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = CodersClass.MD5Code(password);
     }
 
     public String getAuthToken() {

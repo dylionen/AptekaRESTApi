@@ -1,9 +1,9 @@
 package apteka.controllers;
 
+import apteka.functionality.CodersClass;
 import apteka.tables.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.tomcat.jni.Local;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -13,9 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 public class LoginController {
@@ -40,8 +38,10 @@ public class LoginController {
     public ResponseEntity login(@PathVariable String login, @PathVariable String password) throws JsonProcessingException {
         Session session = sessionUserFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
+        String md5Password = CodersClass.MD5Code(password);
+
         List<User> users = session.createQuery("from User where loginName = '" + login + "'" +
-                " and password = '" + password + "'").getResultList();
+                " and password = '" + md5Password + "'").getResultList();
         session.getTransaction().commit();
         if (users.size() == 1) {
             return ResponseEntity.ok(objectMapper.writeValueAsString(users));
@@ -51,19 +51,19 @@ public class LoginController {
 
     //Pobranie wszystkich userów z bazy
 
-   /*
-    @GetMapping("/users")
-    public ResponseEntity getUsers() throws JsonProcessingException {
-        Session session = sessionUserFactory.getCurrentSession();
+    /*
+     @GetMapping("/users")
+     public ResponseEntity getUsers() throws JsonProcessingException {
+         Session session = sessionUserFactory.getCurrentSession();
 
-        Transaction tx = session.beginTransaction();
+         Transaction tx = session.beginTransaction();
 
 
-        List<User> users = session.createQuery("from User").getResultList();
-        session.getTransaction().commit();
-        return ResponseEntity.ok(objectMapper.writeValueAsString(users));
-    }
-*/
+         List<User> users = session.createQuery("from User").getResultList();
+         session.getTransaction().commit();
+         return ResponseEntity.ok(objectMapper.writeValueAsString(users));
+     }
+ */
     //utworzenie nowego usera
     @PostMapping("/users")
     public ResponseEntity createUser(@RequestBody User user) throws JsonProcessingException {
@@ -132,4 +132,17 @@ public class LoginController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @GetMapping("checkCorrectionAuthToken/{authtoken}")
+    public int checkCorrectionHashCode(@PathVariable String authtoken) {
+        Session session = sessionUserFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        List<User> userList = session.createQuery("from User where authToken = '" + authtoken + "'").getResultList();
+        session.getTransaction().commit();
+        if (userList.size() == 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
 }

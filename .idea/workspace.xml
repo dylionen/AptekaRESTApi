@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="851bdb9a-022a-45c2-a386-9d97d7f56132" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/srcJava_10.01.2020.rar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/apteka/functionality/CodersClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src java.rar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/controllers/LocalizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/controllers/LocalizationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/tables/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/tables/User.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -100,9 +100,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CodersClass.MDChecker" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AptekaRESTApi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="apteka.functionality.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="apteka.functionality" />
+      <option name="MAIN_CLASS_NAME" value="apteka.functionality.CodersClass" />
+      <option name="METHOD_NAME" value="MDChecker" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.CodersClass.MDChecker" />
         <item itemvalue="Application.User" />
       </list>
     </recent_temporary>
@@ -173,6 +190,8 @@
       <workItem from="1579371888464" duration="2874000" />
       <workItem from="1579436556423" duration="97000" />
       <workItem from="1579461203718" duration="1851000" />
+      <workItem from="1579549618825" duration="10000" />
+      <workItem from="1579623272573" duration="4086000" />
     </task>
     <servers />
   </component>
