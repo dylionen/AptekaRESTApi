@@ -26,8 +26,8 @@ public class WHMList {
     private int foreignIdArticle;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "id_warehouse_movement")
+    @JsonProperty("idWarehouseMovement")
     private WHM idWHM;
 
     @Column(name = "id_warehouse_movement", insertable = false, updatable = false)

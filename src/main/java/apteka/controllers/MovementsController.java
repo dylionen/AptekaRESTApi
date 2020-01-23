@@ -176,12 +176,12 @@ public class MovementsController {
             throws JsonProcessingException {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
-        System.out.println("Jestem tutaj1");
+
         List<WHM> whm = session.createQuery("from WHM where idWh =" + WHMid).getResultList();
 
         List<WHMList> whmNewList = new LinkedList<>();
         WHMList WHMListOne = null;
-        System.out.println("Jestem tutaj2");
+
         List<Article> articles;
         List<VATTable> vat;
 
@@ -273,6 +273,31 @@ public class MovementsController {
 
 
         return ilosc.toString();
+    }
+
+    @GetMapping("/getWHMDocumentsWithCurrentArticle/{idArticle}")
+    public String getWHMDocumentsWithCurrentArticle(@RequestHeader(value = "Authorization") String authId, @RequestHeader(value = "Localization")
+            int localization, @PathVariable int idArticle) throws JsonProcessingException {
+
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        User user = AuthValidator.getAuth(authId);
+        if (user == null) return "Auth failed";
+
+        List<WHMList> whmList;
+
+        try {
+            whmList = session.createQuery("from WHMList wh where wh.idWHM.bufor = false and idArticle = " + idArticle).getResultList();
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            System.out.println(e.getMessage());
+            return e.getMessage();
+        } finally {
+            //session.getTransaction().commit();
+        }
+        return objectMapper.writeValueAsString(whmList);
     }
 
 }

@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="851bdb9a-022a-45c2-a386-9d97d7f56132" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/apteka/functionality/CodersClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/tables/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/tables/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/tables/WHMList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/tables/WHMList.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -192,6 +190,8 @@
       <workItem from="1579461203718" duration="1851000" />
       <workItem from="1579549618825" duration="10000" />
       <workItem from="1579623272573" duration="4086000" />
+      <workItem from="1579730060625" duration="7000" />
+      <workItem from="1579810430602" duration="3258000" />
     </task>
     <servers />
   </component>
