@@ -2,9 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="851bdb9a-022a-45c2-a386-9d97d7f56132" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Article1.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Article24.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Article25.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Article4.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iTextHelloWorld.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iTextTable.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/apteka/functionality/PDFCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/apteka/tables/ArticleReport.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/srcJava_25.01.2020.rar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/controllers/MovementsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/tables/WHMList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/tables/WHMList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/functionality/CodersClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/functionality/CodersClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/apteka/functionality/SessionFactories.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apteka/functionality/SessionFactories.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -114,10 +125,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PDFCreator.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AptekaRESTApi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="apteka.functionality.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="apteka.functionality" />
+      <option name="MAIN_CLASS_NAME" value="apteka.functionality.PDFCreator" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.CodersClass.MDChecker" />
+        <item itemvalue="JUnit.PDFCreator.test" />
         <item itemvalue="Application.User" />
       </list>
     </recent_temporary>
@@ -192,6 +220,11 @@
       <workItem from="1579623272573" duration="4086000" />
       <workItem from="1579730060625" duration="7000" />
       <workItem from="1579810430602" duration="3258000" />
+      <workItem from="1579976073551" duration="655000" />
+      <workItem from="1580157529579" duration="621000" />
+      <workItem from="1580243881955" duration="5128000" />
+      <workItem from="1580330670864" duration="2692000" />
+      <workItem from="1580401148395" duration="7688000" />
     </task>
     <servers />
   </component>

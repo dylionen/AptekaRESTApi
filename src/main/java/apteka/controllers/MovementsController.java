@@ -1,7 +1,9 @@
 package apteka.controllers;
 
 import apteka.functionality.AuthValidator;
+import apteka.functionality.CodersClass;
 import apteka.functionality.FixStocks;
+import apteka.functionality.PDFCreator;
 import apteka.tables.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +13,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +40,7 @@ public class MovementsController {
             .addAnnotatedClass(AddressType.class)
             .addAnnotatedClass(Contact.class)
             .addAnnotatedClass(ContactType.class)
+            .addAnnotatedClass(ArticleReport.class)
             .buildSessionFactory();
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -287,6 +291,7 @@ public class MovementsController {
 
         List<WHMList> whmList;
 
+
         try {
             whmList = session.createQuery("from WHMList wh where wh.idWHM.bufor = false and idArticle = " + idArticle).getResultList();
             tx.commit();
@@ -295,9 +300,104 @@ public class MovementsController {
             System.out.println(e.getMessage());
             return e.getMessage();
         } finally {
-            //session.getTransaction().commit();
+            session.close();
         }
         return objectMapper.writeValueAsString(whmList);
+    }
+
+    @GetMapping("/getArticleReportWithCurrentArticle/{idArticle}")
+    public String getArticleReportWithCurrentArticle(@RequestHeader(value = "Authorization") String authId, @RequestHeader(value = "Localization")
+            int localization, @PathVariable int idArticle) throws JsonProcessingException {
+
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        User user = AuthValidator.getAuth(authId);
+        if (user == null) return "Auth failed";
+
+        List<ArticleReport> articleReports;
+
+        //  PDFCreator pdfCreator;  //for test
+
+        try {
+            articleReports = session.createQuery("from ArticleReport ar where ar.idArticle.idArticle = " + idArticle).getResultList();
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            return e.getMessage();
+        } finally {
+            session.close();
+        }
+        return objectMapper.writeValueAsString(articleReports);
+    }
+
+    @PostMapping("/createArticleReport/{idArticle}")
+    public ResponseEntity createArticleReport(@RequestHeader(value = "Authorization") String authId, @PathVariable String idArticle, @RequestHeader(value = "Localization")
+            int localization, @RequestBody String date) {
+
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        PDFCreator pdfCreator;
+
+        User user = AuthValidator.getAuth(authId);
+        if (user == null) return new ResponseEntity<String>("Auth failed", HttpStatus.NOT_ACCEPTABLE);
+
+        List<Article> articlesList = session.createQuery("from Article where idArticle= " + idArticle).getResultList();
+        if (articlesList.size() == 0) return new ResponseEntity<String>("Article Error", HttpStatus.NOT_ACCEPTABLE);
+
+        List<Localization> localizationList = session.createQuery("from Localization where idLocalization= " + localization).getResultList();
+        if (localizationList.size() == 0)
+            return new ResponseEntity<String>("Localization Error", HttpStatus.NOT_ACCEPTABLE);
+
+        List<WHMList> whmList = session.createQuery("from WHMList wh where wh.idWHM.bufor = false and idArticle = " + idArticle +
+                " and wh.idWHM.createdDate < '" + CodersClass.changeFormatDate(date) + "'").getResultList();
+        if (whmList.size() == 0) return ResponseEntity.ok(HttpStatus.OK);
+        ArticleReport articleReport;
+
+        pdfCreator = new PDFCreator(whmList, date);
+        articleReport = new ArticleReport(articlesList.get(0), localizationList.get(0), user,
+                pdfCreator.getDocumentByte(), CodersClass.changeFormatDate(date));
+
+        try {
+            session.save(articleReport);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+            return new ResponseEntity<String>(e.getMessage().toString(), HttpStatus.NOT_ACCEPTABLE);
+        } finally {
+            session.close();
+        }
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping("/reports/report/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        List<ArticleReport> articleReports = session.createQuery("from ArticleReport where  idReport = " + id).getResultList();
+        tx.commit();
+        session.close();
+        byte[] document = articleReports.get(0).getDocument();
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF).body(document);
+    }
+
+    @DeleteMapping("/deleteArticleReport/{id}")
+    public ResponseEntity deleteReport(@PathVariable int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        List<ArticleReport> articleReports = session.createQuery("from ArticleReport where  idReport = " + id).getResultList();
+        try {
+            session.delete(articleReports.get(0));
+        } catch (NullPointerException n) {
+            ResponseEntity.badRequest();
+        } finally {
+            tx.commit();
+            session.close();
+        }
+
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 }

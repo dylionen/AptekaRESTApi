@@ -22,6 +22,7 @@ public class SessionFactories {
                 .addAnnotatedClass(VATTable.class)
                 .addAnnotatedClass(TypesWHM.class)
                 .addAnnotatedClass(Numerator.class)
+                .addAnnotatedClass(ArticleReport.class)
                 .buildSessionFactory();
     }
 }
